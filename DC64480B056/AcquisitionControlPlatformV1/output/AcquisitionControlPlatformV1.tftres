@@ -1,0 +1,14 @@
+<Resource>
+    <pages>
+        <page name="开机界面" id="0" />
+        <page name="主界面1" id="1" />
+        <page name="数据文本" id="2" />
+    </pages>
+    <images>
+        <image id="0" url="c:\users\administrator\desktop\dacai\dc64480b056\acquisitioncontrolplatformv1\Images\timg.gif" width="227" height="440" crop="0" effect_left="0" effect_top="0" effect_width="227" effect_height="440" size="1997600" delay="10" frameCount="10" />
+        <image id="1" url="c:\users\administrator\desktop\dacai\dc64480b056\acquisitioncontrolplatformv1\Images\timg (1).jpg" width="76" height="71" crop="0" effect_left="0" effect_top="0" effect_width="76" effect_height="71" size="10792" />
+        <image id="2" url="c:\users\administrator\desktop\dacai\dc64480b056\acquisitioncontrolplatformv1\Images\QQ截图20181108172912.bmp" width="64" height="45" crop="0" effect_left="0" effect_top="0" effect_width="64" effect_height="45" size="5760" />
+        <image id="3" url="c:\users\administrator\desktop\dacai\dc64480b056\acquisitioncontrolplatformv1\Images\timg (1).jpg" width="35" height="35" crop="0" effect_left="0" effect_top="0" effect_width="35" effect_height="35" size="2450" />
+    </images>
+    <waves />
+</Resource>

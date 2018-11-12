@@ -1,0 +1,659 @@
+###############################################################################
+#
+# IAR ELF Linker V7.40.3.8902/W32 for ARM                 09/Nov/2018  18:15:39
+# Copyright 2007-2015 IAR Systems AB.
+#
+#    Output file  =  
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Exe\c.out
+#    Map file     =  
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\List\c.map
+#    Command line =  
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\bsp_init.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\bsp_lcd.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\clog.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\cqueue.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\crc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\cshell.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\cshell_port.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\cshell_user.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\cstring.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\flash_log.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\gui_cmd_queue.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\gui_dev_api.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\gui_process.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\gui_task.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\main.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\misc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal_cfg.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal_clock.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal_core.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal_cpu.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal_msg.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal_task.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal_timeout.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\osal_timer.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\rtt_log.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\SEGGER_RTT.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\SEGGER_RTT_printf.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\serial_log.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\startup_stm32f429_439xx.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_adc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_bsp_systick.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_bsp_usart.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_can.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_cec.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_crc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_cryp.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_cryp_aes.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_cryp_des.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_cryp_tdes.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_dac.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_dbgmcu.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_dcmi.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_dfsdm.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_dma.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_dma2d.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_dsi.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_exti.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_flash.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_flash_ramfunc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_fmc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_fmpi2c.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_gpio.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_hash.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_hash_md5.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_hash_sha1.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_i2c.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_it.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_iwdg.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_lptim.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_ltdc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_pwr.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_qspi.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_rcc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_rng.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_rtc.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_sai.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_sdio.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_spdifrx.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_spi.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_syscfg.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_tim.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_usart.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\stm32f4xx_wwdg.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\system_info.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\system_init.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\system_param.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\system_stm32f4xx.o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj\user_task.o
+#        -o
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Exe\c.out
+#        --map
+#        C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\List\c.map
+#        --config "D:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.2\arm\config\linker\ST\stm32f429xG.icf" --semihosting --entry
+#        __iar_program_start --vfe
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A1":  place at 0x08000000 { ro section .intvec };
+"P1":  place in [from 0x08000000 to 0x080fffff] { ro };
+"P2":  place in [from 0x20000000 to 0x2002ffff] { rw, block CSTACK, block HEAP };
+
+  Section            Kind        Address    Size  Object
+  -------            ----        -------    ----  ------
+"A1":                                      0x1ac
+  .intvec            ro code  0x08000000   0x1ac  startup_stm32f429_439xx.o [1]
+                            - 0x080001ac   0x1ac
+
+"P1":                                     0x35cc
+  .text              ro code  0x080001ac   0xdae  xprintffull_nomb.o [3]
+  .text              ro code  0x08000f5a    0x1a  xsnprout.o [3]
+  .text              ro code  0x08000f74    0x16  strchr.o [5]
+  .text              ro code  0x08000f8a     0xa  xsprout.o [3]
+  .text              ro code  0x08000f94    0x36  strlen.o [5]
+  .rodata            const    0x08000fca     0x2  clog.o [1]
+  .text              ro code  0x08000fcc    0x58  memchr.o [5]
+  .text              ro code  0x08001024    0xee  I64DivMod.o [5]
+  .text              ro code  0x08001114    0x76  ABImemcpy_unaligned.o [5]
+  .text              ro code  0x0800118a    0x42  xdnorm.o [4]
+  .text              ro code  0x080011cc    0x2e  DblCmpLe.o [4]
+  .text              ro code  0x080011fc    0x2e  DblCmpGe.o [4]
+  .text              ro code  0x0800122c   0x118  xdscale.o [4]
+  .text              ro code  0x08001344    0x58  DblToI32.o [4]
+  .text              ro code  0x0800139c    0x30  I32ToDbl.o [4]
+  .text              ro code  0x080013cc   0x180  DblSub.o [4]
+  .text              ro code  0x0800154c   0x1a2  DblMul.o [4]
+  .text              ro code  0x080016f0   0x256  DblDiv.o [4]
+  .text              ro code  0x08001946     0xe  div.o [3]
+  .text              ro code  0x08001954     0x2  I64DivZer.o [5]
+  .text              ro code  0x08001958    0xd4  DblAdd.o [4]
+  .text              ro code  0x08001a2c   0x2fe  stm32f4xx_usart.o [1]
+  .text              ro code  0x08001d2c   0x1b4  stm32f4xx_rcc.o [1]
+  .text              ro code  0x08001ee0   0x2cc  gui_process.o [1]
+  .text              ro code  0x080021ac   0x10c  gui_cmd_queue.o [1]
+  .text              ro code  0x080022b8    0xa2  gui_dev_api.o [1]
+  .text              ro code  0x0800235a    0x3c  bsp_lcd.o [1]
+  .text              ro code  0x08002398   0x144  stm32f4xx_bsp_usart.o [1]
+  .text              ro code  0x080024dc   0x104  stm32f4xx_gpio.o [1]
+  .text              ro code  0x080025e0    0x8c  misc.o [1]
+  .text              ro code  0x0800266c   0x23c  SEGGER_RTT.o [1]
+  .text              ro code  0x080028a8    0x44  strcpy_unaligned.o [5]
+  .text              ro code  0x080028ec   0x228  osal_clock.o [1]
+  .text              ro code  0x08002b14   0x1d0  osal_timer.o [1]
+  .text              ro code  0x08002ce4    0xe8  osal_core.o [1]
+  .text              ro code  0x08002dcc     0x2  osal_msg.o [1]
+  .text              ro code  0x08002dce    0x1a  osal_task.o [1]
+  .text              ro code  0x08002de8    0x44  user_task.o [1]
+  .text              ro code  0x08002e2c    0x88  gui_task.o [1]
+  .text              ro code  0x08002eb4   0x1d0  rtt_log.o [1]
+  .text              ro code  0x08003084    0x3c  clog.o [1]
+  .text              ro code  0x080030c0    0x34  sprintf.o [3]
+  .text              ro code  0x080030f4    0x3c  vsnprint.o [3]
+  .text              ro code  0x08003130   0x17c  system_stm32f4xx.o [1]
+  .text              ro code  0x080032ac    0x98  stm32f4xx_bsp_systick.o [1]
+  .text              ro code  0x08003344    0x74  system_param.o [1]
+  .text              ro code  0x080033b8    0x40  zero_init3.o [5]
+  .text              ro code  0x080033f8    0x2e  stm32f4xx_it.o [1]
+  .text              ro code  0x08003426    0x2c  copy_init3.o [5]
+  .text              ro code  0x08003454    0x28  data_init.o [5]
+  .text              ro code  0x0800347c    0x22  fpinit_M.o [4]
+  .iar.init_table    const    0x080034a0    0x24  - Linker created -
+  .text              ro code  0x080034c4    0x1c  main.o [1]
+  .text              ro code  0x080034e0    0x18  bsp_init.o [1]
+  .text              ro code  0x080034f8     0xc  system_init.o [1]
+  .text              ro code  0x08003504     0x8  system_info.o [1]
+  .text              ro code  0x0800350c    0x1a  cmain.o [5]
+  .text              ro code  0x08003526     0x4  low_level_init.o [3]
+  .text              ro code  0x0800352a     0x4  exit.o [3]
+  .text              ro code  0x08003530     0xa  cexit.o [5]
+  .text              ro code  0x0800353c    0x14  exit.o [6]
+  .rodata            const    0x08003550    0x18  rtt_log.o [1]
+  .text              ro code  0x08003568    0x10  startup_stm32f429_439xx.o [1]
+  .rodata            const    0x08003578     0xc  osal_task.o [1]
+  .rodata            const    0x08003584     0xc  SEGGER_RTT.o [1]
+  .text              ro code  0x08003590     0xc  cstartup_M.o [5]
+  .rodata            const    0x0800359c     0x8  clog.o [1]
+  .rodata            const    0x080035a4     0x8  clog.o [1]
+  .rodata            const    0x080035ac     0x8  clog.o [1]
+  .rodata            const    0x080035b4     0x8  clog.o [1]
+  .rodata            const    0x080035bc     0x8  clog.o [1]
+  .rodata            const    0x080035c4     0x8  clog.o [1]
+  .rodata            const    0x080035cc     0x8  rtt_log.o [1]
+  .rodata            const    0x080035d4     0x8  SEGGER_RTT.o [1]
+  .rodata            const    0x080035dc     0x4  gui_dev_api.o [1]
+  .text              ro code  0x080035e0     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080035e4     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080035e8     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080035ec     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080035f0     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080035f4     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080035f8     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080035fc     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003600     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003604     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003608     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800360c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003610     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003614     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003618     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800361c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003620     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003624     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003628     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800362c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003630     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003634     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003638     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800363c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003640     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003644     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003648     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800364c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003650     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003654     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003658     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800365c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003660     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003664     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003668     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800366c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003670     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003674     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003678     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800367c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003680     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003684     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003688     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800368c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003690     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003694     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003698     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800369c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036a0     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036a4     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036a8     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036ac     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036b0     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036b4     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036b8     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036bc     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036c0     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036c4     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036c8     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036cc     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036d0     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036d4     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036d8     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036dc     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036e0     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036e4     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036e8     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036ec     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036f0     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036f4     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036f8     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x080036fc     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003700     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003704     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003708     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800370c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003710     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003714     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003718     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800371c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003720     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003724     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003728     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800372c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003730     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003734     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003738     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x0800373c     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003740     0x4  startup_stm32f429_439xx.o [1]
+  .text              ro code  0x08003744     0x4  startup_stm32f429_439xx.o [1]
+  .rodata            const    0x08003748     0x0  zero_init3.o [5]
+  .rodata            const    0x08003748     0x0  copy_init3.o [5]
+  Initializer bytes  const    0x08003748    0x30  <for P2 s0>
+                            - 0x08003778  0x35cc
+
+"P2":                                     0x2898
+  P2 s0                       0x20000000    0x30  <Init block>
+    .data            inited   0x20000000    0x1c  clog.o [1]
+    .data            inited   0x2000001c    0x10  stm32f4xx_rcc.o [1]
+    .data            inited   0x2000002c     0x1  rtt_log.o [1]
+  .bss               zero     0x20000030   0x204  gui_cmd_queue.o [1]
+  .bss               zero     0x20000234   0x1e0  osal_timer.o [1]
+  .bss               zero     0x20000414   0x12c  rtt_log.o [1]
+  .bss               zero     0x20000540   0x12c  SEGGER_RTT.o [1]
+  .bss               zero     0x2000066c    0xfc  system_info.o [1]
+  .bss               zero     0x20000768    0x78  SEGGER_RTT.o [1]
+  .bss               zero     0x200007e0    0x40  gui_process.o [1]
+  .bss               zero     0x20000820    0x34  SEGGER_RTT.o [1]
+  .bss               zero     0x20000854    0x14  clog.o [1]
+  .bss               zero     0x20000868     0xc  osal_task.o [1]
+  .bss               zero     0x20000874     0x4  gui_cmd_queue.o [1]
+  .bss               zero     0x20000878     0x4  gui_process.o [1]
+  .bss               zero     0x2000087c     0x4  osal_clock.o [1]
+  .bss               zero     0x20000880     0x4  osal_clock.o [1]
+  .bss               zero     0x20000884     0x4  osal_core.o [1]
+  .bss               zero     0x20000888     0x4  osal_timer.o [1]
+  .bss               zero     0x2000088c     0x4  stm32f4xx_bsp_systick.o [1]
+  .bss               zero     0x20000890     0x2  gui_cmd_queue.o [1]
+  .bss               zero     0x20000892     0x2  osal_clock.o [1]
+  .bss               zero     0x20000894     0x1  gui_task.o [1]
+  .bss               zero     0x20000895     0x1  user_task.o [1]
+  CSTACK                      0x20000898  0x2000  <Block>
+    CSTACK           uninit   0x20000898  0x2000  <Block tail>
+                            - 0x20002898  0x2898
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x866:
+          0x20000030  0x866
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0x30 (106% of destination):
+          0x08003748   0x30
+    1 destination range, total size 0x2d:
+          0x20000000   0x2d
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                     ro code  ro data  rw data
+    ------                     -------  -------  -------
+C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj: [1]
+    SEGGER_RTT.o                   572       20      472
+    bsp_init.o                      24
+    bsp_lcd.o                       60
+    clog.o                          60       78       48
+    gui_cmd_queue.o                268               522
+    gui_dev_api.o                  162        4
+    gui_process.o                  716                68
+    gui_task.o                     136                 1
+    main.o                          28
+    misc.o                         140
+    osal_clock.o                   552                10
+    osal_core.o                    232                 4
+    osal_msg.o                       2
+    osal_task.o                     26       12       12
+    osal_timer.o                   464               484
+    rtt_log.o                      464       33      301
+    startup_stm32f429_439xx.o      804
+    stm32f4xx_bsp_systick.o        152                 4
+    stm32f4xx_bsp_usart.o          324
+    stm32f4xx_gpio.o               260
+    stm32f4xx_it.o                  46
+    stm32f4xx_rcc.o                436       16       16
+    stm32f4xx_usart.o              766
+    system_info.o                    8               252
+    system_init.o                   12
+    system_param.o                 116
+    system_stm32f4xx.o             380
+    user_task.o                     68                 1
+    ----------------------------------------------------
+    Total:                       7 278      163    2 195
+
+command line: [2]
+    ----------------------------------------------------
+    Total:
+
+dl7M_tln.a: [3]
+    div.o                           14
+    exit.o                           4
+    low_level_init.o                 4
+    sprintf.o                       52
+    vsnprint.o                      60
+    xprintffull_nomb.o           3 502
+    xsnprout.o                      26
+    xsprout.o                       10
+    ----------------------------------------------------
+    Total:                       3 672
+
+m7M_tls.a: [4]
+    DblAdd.o                       212
+    DblCmpGe.o                      46
+    DblCmpLe.o                      46
+    DblDiv.o                       598
+    DblMul.o                       418
+    DblSub.o                       384
+    DblToI32.o                      88
+    I32ToDbl.o                      48
+    fpinit_M.o                      34
+    xdnorm.o                        66
+    xdscale.o                      280
+    ----------------------------------------------------
+    Total:                       2 220
+
+rt7M_tl.a: [5]
+    ABImemcpy_unaligned.o          118
+    I64DivMod.o                    238
+    I64DivZer.o                      2
+    cexit.o                         10
+    cmain.o                         26
+    copy_init3.o                    44
+    cstartup_M.o                    12
+    data_init.o                     40
+    memchr.o                        88
+    strchr.o                        22
+    strcpy_unaligned.o              68
+    strlen.o                        54
+    zero_init3.o                    64
+    ----------------------------------------------------
+    Total:                         786
+
+shb_l.a: [6]
+    exit.o                          20
+    ----------------------------------------------------
+    Total:                          20
+
+    Gaps                            20        2
+    Linker created                           39    8 192
+--------------------------------------------------------
+    Grand Total:                13 996      204   10 387
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address   Size  Type      Object
+-----                      -------   ----  ----      ------
+.iar.init_table$$Base   0x080034a0          --   Gb  - Linker created -
+.iar.init_table$$Limit  0x080034c4          --   Gb  - Linker created -
+?main                   0x0800350d         Code  Gb  cmain.o [5]
+APBAHBPrescTable        0x2000001c   0x10  Data  Lc  stm32f4xx_rcc.o [1]
+BSP_Init                0x080034e9   0x10  Code  Gb  bsp_init.o [1]
+BSP_LCD_SendUint16      0x0800237f   0x18  Code  Gb  bsp_lcd.o [1]
+BSP_LCD_WriteByte       0x0800236f   0x10  Code  Gb  bsp_lcd.o [1]
+BSP_LCD_WriteBytes      0x0800235b   0x14  Code  Gb  bsp_lcd.o [1]
+BSP_SYSTICK_IncTick     0x0800331f    0xc  Code  Gb  stm32f4xx_bsp_systick.o [1]
+BSP_SYSTICK_Open        0x08003303   0x1c  Code  Gb  stm32f4xx_bsp_systick.o [1]
+BSP_USART_IRQHandler    0x080024b1   0x24  Code  Gb  stm32f4xx_bsp_usart.o [1]
+BSP_USART_Open          0x08002399   0xce  Code  Gb  stm32f4xx_bsp_usart.o [1]
+BSP_USART_WriteByte     0x0800248b   0x26  Code  Gb  stm32f4xx_bsp_usart.o [1]
+BSP_USART_WriteBytes    0x08002467   0x24  Code  Gb  stm32f4xx_bsp_usart.o [1]
+Board_Init              0x080034e1    0x8  Code  Gb  bsp_init.o [1]
+BusFault_Handler        0x080033ff    0x2  Code  Gb  stm32f4xx_it.o [1]
+CLog_GetCurrentTaskID   0x08003085    0x4  Code  Gb  clog.o [1]
+CLog_GetTime            0x08003089   0x20  Code  Gb  clog.o [1]
+CLog_Init               0x080030a9   0x14  Code  Gb  clog.o [1]
+CSTACK$$Base            0x20000898          --   Gb  - Linker created -
+CSTACK$$Limit           0x20002898          --   Gb  - Linker created -
+DebugMon_Handler        0x08003405    0x2  Code  Gb  stm32f4xx_it.o [1]
+GPIO_Init               0x080024dd   0xaa  Code  Gb  stm32f4xx_gpio.o [1]
+GPIO_PinAFConfig        0x08002587   0x5a  Code  Gb  stm32f4xx_gpio.o [1]
+GUI_Queue_Find_Cmd      0x08002227   0x84  Code  Gb  gui_cmd_queue.o [1]
+GUI_Queue_Push          0x080021ad   0x2c  Code  Gb  gui_cmd_queue.o [1]
+GUI_TEXT_SetFloat       0x080022dd   0x7e  Code  Gb  gui_dev_api.o [1]
+GUI_Update              0x08002111   0x20  Code  Gb  gui_process.o [1]
+GuiTask_Init            0x08002e2d   0x26  Code  Gb  gui_task.o [1]
+GuiTask_Process         0x08002e53   0x5c  Code  Gb  gui_task.o [1]
+Gui_CheckCMD_Loop_Process
+                        0x08001efd   0x40  Code  Gb  gui_process.o [1]
+HardFault_Handler       0x080033fb    0x2  Code  Gb  stm32f4xx_it.o [1]
+LoadInt                 0x08000739   0x6e  Code  Lc  xprintffull_nomb.o [3]
+MemManage_Handler       0x080033fd    0x2  Code  Gb  stm32f4xx_it.o [1]
+NMI_Handler             0x080033f9    0x2  Code  Gb  stm32f4xx_it.o [1]
+NVIC_Init               0x080025eb   0x6e  Code  Gb  misc.o [1]
+NVIC_PriorityGroupConfig
+                        0x080025e1    0xa  Code  Gb  misc.o [1]
+NVIC_SetPriority        0x080032ad   0x26  Code  Lc  stm32f4xx_bsp_systick.o [1]
+NVIC_SystemReset        0x08001ee1   0x1c  Code  Lc  gui_process.o [1]
+OS_Clock_ConvertToDateTime
+                        0x08002995  0x16e  Code  Gb  osal_clock.o [1]
+OS_Clock_GetSeconds     0x0800294b   0x12  Code  Gb  osal_clock.o [1]
+OS_Clock_GetSystemClock
+                        0x0800295d   0x12  Code  Gb  osal_clock.o [1]
+OS_Clock_Update         0x080028ed   0x5e  Code  Gb  osal_clock.o [1]
+OS_Events_Set           0x08002d93   0x2e  Code  Gb  osal_core.o [1]
+OS_Init                 0x08002ce5   0x10  Code  Gb  osal_core.o [1]
+OS_Msg_Init             0x08002dcd    0x2  Code  Gb  osal_msg.o [1]
+OS_Start                0x08002cf5    0x8  Code  Gb  osal_core.o [1]
+OS_Task_Init            0x08002dcf   0x1a  Code  Gb  osal_task.o [1]
+OS_Timer_Init           0x08002b15   0x20  Code  Gb  osal_timer.o [1]
+OS_Timer_Start          0x08002c4d   0x28  Code  Gb  osal_timer.o [1]
+OS_Timer_Update         0x08002c75   0x64  Code  Gb  osal_timer.o [1]
+PendSV_Handler          0x08003407    0x2  Code  Gb  stm32f4xx_it.o [1]
+RCC_AHB1PeriphClockCmd  0x08001e41   0x22  Code  Gb  stm32f4xx_rcc.o [1]
+RCC_APB1PeriphResetCmd  0x08001e81   0x1e  Code  Gb  stm32f4xx_rcc.o [1]
+RCC_APB2PeriphClockCmd  0x08001e63   0x1e  Code  Gb  stm32f4xx_rcc.o [1]
+RCC_APB2PeriphResetCmd  0x08001e9f   0x1e  Code  Gb  stm32f4xx_rcc.o [1]
+RCC_GetClocksFreq       0x08001d2d  0x114  Code  Gb  stm32f4xx_rcc.o [1]
+RTTLog_GetLogLevel      0x08003061    0x6  Code  Lc  rtt_log.o [1]
+RTTLog_Init             0x08002eb5   0x20  Code  Gb  rtt_log.o [1]
+RTTLog_SetLogLevel      0x08003069    0x6  Code  Lc  rtt_log.o [1]
+RTTLog_Write            0x08002ed5   0xba  Code  Lc  rtt_log.o [1]
+RTTLog_WriteRAW         0x0800304d   0x14  Code  Lc  rtt_log.o [1]
+RTTLog_vprintf          0x08002f91   0xba  Code  Lc  rtt_log.o [1]
+Region$$Table$$Base     0x080034a0          --   Gb  - Linker created -
+Region$$Table$$Limit    0x080034c4          --   Gb  - Linker created -
+SEGGER_RTT_Write        0x0800285d   0x38  Code  Gb  SEGGER_RTT.o [1]
+SEGGER_RTT_WriteNoLock  0x080027dd   0x80  Code  Gb  SEGGER_RTT.o [1]
+SVC_Handler             0x08003403    0x2  Code  Gb  stm32f4xx_it.o [1]
+SetSysClock             0x08003183   0xf6  Code  Lc  system_stm32f4xx.o [1]
+SysTick_Config          0x080032d3   0x30  Code  Lc  stm32f4xx_bsp_systick.o [1]
+SysTick_Handler         0x08003409   0x14  Code  Gb  stm32f4xx_it.o [1]
+SystemInfo_Init         0x08003505    0x8  Code  Gb  system_info.o [1]
+SystemInit              0x08003131   0x52  Code  Gb  system_stm32f4xx.o [1]
+SystemParam_Init        0x08003345   0x74  Code  Gb  system_param.o [1]
+System_Load             0x080034f9    0xc  Code  Gb  system_init.o [1]
+USART1_IRQHandler       0x0800341d    0xa  Code  Gb  stm32f4xx_it.o [1]
+USART_Cmd               0x08001c1d   0x1c  Code  Gb  stm32f4xx_usart.o [1]
+USART_DeInit            0x08001a2d   0xdc  Code  Gb  stm32f4xx_usart.o [1]
+USART_GetFlagStatus     0x08001c9f   0x1e  Code  Gb  stm32f4xx_usart.o [1]
+USART_GetITStatus       0x08001cbd   0x6e  Code  Gb  stm32f4xx_usart.o [1]
+USART_ITConfig          0x08001c49   0x56  Code  Gb  stm32f4xx_usart.o [1]
+USART_Init              0x08001b09   0xee  Code  Gb  stm32f4xx_usart.o [1]
+USART_ReceiveData       0x08001c41    0x8  Code  Gb  stm32f4xx_usart.o [1]
+USART_SendData          0x08001c39    0x8  Code  Gb  stm32f4xx_usart.o [1]
+UsageFault_Handler      0x08003401    0x2  Code  Gb  stm32f4xx_it.o [1]
+UserTask_Init           0x08002de9    0x6  Code  Gb  user_task.o [1]
+UserTask_Process        0x08002def   0x38  Code  Gb  user_task.o [1]
+_DoInit                 0x0800266d   0x62  Code  Lc  SEGGER_RTT.o [1]
+_GenldFullNoMb          0x08000caf  0x264  Code  Lc  xprintffull_nomb.o [3]
+_GetAvailWriteSpace     0x080027b3   0x26  Code  Lc  SEGGER_RTT.o [1]
+_LdtobFullNoMb          0x080008ad  0x3fc  Code  Lc  xprintffull_nomb.o [3]
+_LitobFullNoMb          0x080007a7  0x106  Code  Lc  xprintffull_nomb.o [3]
+_PrintfFullNoMb         0x080001ad  0x586  Code  Gb  xprintffull_nomb.o [3]
+_PutcharsFullNoMb       0x08000f13   0x2e  Code  Lc  xprintffull_nomb.o [3]
+_SEGGER_RTT             0x20000768   0x78  Data  Gb  SEGGER_RTT.o [1]
+_SNProut                0x08000f5b   0x1a  Code  Gb  xsnprout.o [3]
+_SProut                 0x08000f8b    0xa  Code  Gb  xsprout.o [3]
+_WriteBlocking          0x080026cf   0x82  Code  Lc  SEGGER_RTT.o [1]
+_WriteNoCheck           0x08002751   0x62  Code  Lc  SEGGER_RTT.o [1]
+__aeabi_cdcmple         0x080011cd         Code  Gb  DblCmpLe.o [4]
+__aeabi_cdrcmple        0x080011fd         Code  Gb  DblCmpGe.o [4]
+__aeabi_d2iz            0x08001345         Code  Gb  DblToI32.o [4]
+__aeabi_d2uiz           0x08001371         Code  Gb  DblToI32.o [4]
+__aeabi_ddiv            0x080016f1         Code  Gb  DblDiv.o [4]
+__aeabi_dmul            0x0800154d         Code  Gb  DblMul.o [4]
+__aeabi_dsub            0x080013cd         Code  Gb  DblSub.o [4]
+__aeabi_i2d             0x0800139d         Code  Gb  I32ToDbl.o [4]
+__aeabi_ldiv0           0x08001955         Code  Gb  I64DivZer.o [5]
+__aeabi_ui2d            0x080013b1         Code  Gb  I32ToDbl.o [4]
+__aeabi_uldivmod        0x08001025         Code  Gb  I64DivMod.o [5]
+__cmain                 0x0800350d         Code  Gb  cmain.o [5]
+__exit                  0x0800353d   0x14  Code  Gb  exit.o [6]
+__iar_Dnorm             0x0800118b   0x42  Code  Gb  xdnorm.o [4]
+__iar_Dscale            0x0800122d  0x118  Code  Gb  xdscale.o [4]
+__iar_Memchr            0x08000fcd         Code  Gb  memchr.o [5]
+__iar_Strchr            0x08000f75         Code  Gb  strchr.o [5]
+__iar_copy_init3        0x08003427   0x2c  Code  Gb  copy_init3.o [5]
+__iar_d2uiz             0x0800137d         Code  Gb  DblToI32.o [4]
+__iar_dadd              0x08001959         Code  Gb  DblAdd.o [4]
+__iar_data_init3        0x08003455   0x28  Code  Gb  data_init.o [5]
+__iar_dsub              0x080013e1         Code  Gb  DblSub.o [4]
+__iar_dsubStart         0x080013f3         Code  Gb  DblSub.o [4]
+__iar_init_vfp          0x0800347d         Code  Gb  fpinit_M.o [4]
+__iar_program_start     0x08003591         Code  Gb  cstartup_M.o [5]
+__iar_ui2d              0x080013b5         Code  Gb  I32ToDbl.o [4]
+__iar_unaligned___aeabi_memcpy
+                        0x08001115         Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned___aeabi_memcpy4
+                        0x08001135         Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned___aeabi_memcpy8
+                        0x08001135         Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned_strcpy  0x080028a9         Code  Gb  strcpy_unaligned.o [5]
+__iar_zero_init3        0x080033b9   0x40  Code  Gb  zero_init3.o [5]
+__low_level_init        0x08003527    0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x08000000         Data  Gb  startup_stm32f429_439xx.o [1]
+_acDownBuffer           0x20000820   0x34  Data  Lc  SEGGER_RTT.o [1]
+_acUpBuffer             0x20000540  0x12c  Data  Lc  SEGGER_RTT.o [1]
+_call_main              0x08003519         Code  Gb  cmain.o [5]
+_exit                   0x08003531         Code  Gb  cexit.o [5]
+_main                   0x08003523         Code  Gb  cmain.o [5]
+cmd_buffer              0x200007e0   0x40  Data  Gb  gui_process.o [1]
+div                     0x08001947    0xe  Code  Gb  div.o [3]
+exit                    0x0800352b    0x4  Code  Gb  exit.o [3]
+g_GuiTask_Id            0x20000894    0x1  Data  Gb  gui_task.o [1]
+g_LogLevelText          0x20000000   0x1c  Data  Gb  clog.o [1]
+g_SystemInfo            0x2000066c   0xfc  Data  Gb  system_info.o [1]
+g_TasksEvents           0x20000868    0xc  Data  Gb  osal_task.o [1]
+g_TasksFnArr            0x08003578    0xc  Data  Gb  osal_task.o [1]
+g_UserTask_Id           0x20000895    0x1  Data  Gb  user_task.o [1]
+gui_Message_Process     0x08001f3d  0x1a4  Code  Lc  gui_process.o [1]
+gui_SendEndCMD          0x080022c3   0x14  Code  Lc  gui_dev_api.o [1]
+gui_SendHeadCMD         0x080022b9    0xa  Code  Lc  gui_dev_api.o [1]
+gui_notify_button       0x080020eb    0x2  Code  Lc  gui_process.o [1]
+gui_notify_handshake    0x080020e1    0x2  Code  Lc  gui_process.o [1]
+gui_notify_menu         0x080020f5   0x12  Code  Lc  gui_process.o [1]
+gui_notify_meter        0x080020f3    0x2  Code  Lc  gui_process.o [1]
+gui_notify_progress     0x080020ef    0x2  Code  Lc  gui_process.o [1]
+gui_notify_readflash    0x0800210b    0x2  Code  Lc  gui_process.o [1]
+gui_notify_readrtc      0x0800210f    0x2  Code  Lc  gui_process.o [1]
+gui_notify_screen       0x080020e3    0x6  Code  Lc  gui_process.o [1]
+gui_notify_selector     0x08002107    0x2  Code  Lc  gui_process.o [1]
+gui_notify_slider       0x080020f1    0x2  Code  Lc  gui_process.o [1]
+gui_notify_text         0x080020ed    0x2  Code  Lc  gui_process.o [1]
+gui_notify_timer        0x08002109    0x2  Code  Lc  gui_process.o [1]
+gui_notify_touchxy      0x080020e9    0x2  Code  Lc  gui_process.o [1]
+gui_notify_writeflash   0x0800210d    0x2  Code  Lc  gui_process.o [1]
+gui_queue               0x20000030  0x204  Data  Lc  gui_cmd_queue.o [1]
+gui_queue_get_size      0x08002209   0x1e  Code  Lc  gui_cmd_queue.o [1]
+gui_queue_pop           0x080021d9   0x30  Code  Lc  gui_cmd_queue.o [1]
+main                    0x080034c5   0x1c  Code  Gb  main.o [1]
+memchr                  0x08000fcd         Code  Gb  memchr.o [5]
+month_length            0x0800296f   0x26  Code  Lc  osal_clock.o [1]
+osalRun                 0x08002d17   0x7c  Code  Lc  osal_core.o [1]
+osalTimeUpdate          0x08002cfd   0x1a  Code  Lc  osal_core.o [1]
+osalTimerAdd            0x08002bcd   0x80  Code  Gb  osal_timer.o [1]
+osalTimerAlloc          0x08002b35   0x64  Code  Gb  osal_timer.o [1]
+osalTimerFind           0x08002b99   0x34  Code  Gb  osal_timer.o [1]
+s_CBvalue               0x20000878    0x4  Data  Gb  gui_process.o [1]
+s_LogLevel              0x2000002c    0x1  Data  Lc  rtt_log.o [1]
+s_RTTLog                0x20000854   0x14  Data  Gb  clog.o [1]
+s_RTTLogBuf             0x20000414  0x12c  Data  Lc  rtt_log.o [1]
+s_Systick_Ticks         0x2000088c    0x4  Data  Gb  stm32f4xx_bsp_systick.o [1]
+s_cmd_pos               0x20000890    0x2  Data  Lc  gui_cmd_queue.o [1]
+s_cmd_state             0x20000874    0x4  Data  Lc  gui_cmd_queue.o [1]
+s_osalClock_ElapsedMs   0x20000880    0x4  Data  Lc  osal_clock.o [1]
+s_osalClock_MilliSeconds
+                        0x20000892    0x2  Data  Lc  osal_clock.o [1]
+s_osalClock_Seconds     0x2000087c    0x4  Data  Lc  osal_clock.o [1]
+s_osalTimerHead         0x20000888    0x4  Data  Lc  osal_timer.o [1]
+s_osalTimerMemHeap      0x20000234  0x1e0  Data  Lc  osal_timer.o [1]
+sprintf                 0x080030c1   0x34  Code  Gb  sprintf.o [3]
+strchr                  0x08000f75         Code  Gb  strchr.o [5]
+strlen                  0x08000f95         Code  Gb  strlen.o [5]
+text_screen_update_event
+                        0x08002131   0x64  Code  Lc  gui_process.o [1]
+vsnprintf               0x080030f5   0x3c  Code  Gb  vsnprint.o [3]
+
+
+[1] = C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Obj
+[2] = command line
+[3] = dl7M_tln.a
+[4] = m7M_tls.a
+[5] = rt7M_tl.a
+[6] = shb_l.a
+
+  13 996 bytes of readonly  code memory
+     204 bytes of readonly  data memory
+  10 387 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
