@@ -15,7 +15,7 @@
 #include "gui_dev_api.h"
 #include "system_info.h"
 #include "stm32_bsp_conf.h"
-
+#include "gui_task.h"
 /**
  * @addtogroup    XXX 
  * @{  
@@ -65,6 +65,7 @@ typedef struct
 {
     uint8_t current_screen_id;
     uint8_t current_equip_id;
+    uint8_t getdata_buf[50];
 }s_CBvalue_t;
 
 /**
@@ -79,7 +80,7 @@ typedef struct
 uint8_t cmd_buffer[CMD_MAX_SIZE];                                                     //指令缓存
 
 s_CBvalue_t s_CBvalue={
- .current_screen_id=0,}; 
+ .current_screen_id=99,}; 
 /**
  * @}
  */
@@ -99,7 +100,7 @@ s_CBvalue_t s_CBvalue={
  * @brief         
  * @{  
  */
-static void gui_Message_Process( PCTRL_MSG_t msg, uint16_t size );
+static void gui_Message_Process( GUI_Dacai_Proto_t * msg, uint16_t size );
 static void gui_notify_handshake();
 static void gui_notify_screen(uint16_t screen_id);
 static void gui_notify_button(uint16_t screen_id, uint16_t control_id, uint8_t  state);
@@ -114,7 +115,7 @@ static void gui_notify_timer(uint16_t screen_id, uint16_t control_id);
 static void gui_notify_readflash(uint8_t status,uint8_t *_data,uint16_t length);
 static void gui_notify_writeflash(uint8_t status);
 static void gui_notify_readrtc(uint8_t year,uint8_t month,uint8_t week,uint8_t day,uint8_t hour,uint8_t minute,uint8_t second);
-
+static void gui_notify_getdata(uint16_t screen_id, uint16_t control_id, uint8_t *str,uint8_t *dst); 
 static void text_screen_update_event();
 /**
  * @}
@@ -127,14 +128,13 @@ static void text_screen_update_event();
  */
 void Gui_CheckCMD_Loop_Process()
 {   
-    uint8_t size=0;
+    uint16_t size=0;
     
     size = GUI_Queue_Find_Cmd(cmd_buffer,CMD_MAX_SIZE);                          //从缓冲区中获取一条指令         
     
     if(size>0&&cmd_buffer[1]!=0x07)                                              //接收到指令 ，及判断是否为开机提示
     {                                                                           
-        gui_Message_Process((PCTRL_MSG_t)cmd_buffer, size);                      //指令处理
-        
+        gui_Message_Process((GUI_Dacai_Proto_t *)cmd_buffer, size);                      //指令处理
     }                                                                           
     else if(size>0&&cmd_buffer[1]==0x07)                                         //如果为指令0x07就软重置STM32  
     {                                                                           
@@ -146,39 +146,39 @@ void Gui_CheckCMD_Loop_Process()
 //*  \brief  消息处理流程
 //*  \param msg 待处理消息
 //*  \param size 消息长度
-//*/
-static void gui_Message_Process( PCTRL_MSG_t msg, uint16_t size )
+//*
+static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
 {
     uint8_t cmd_type = msg->cmd_type;                                                  //指令类型
     uint8_t ctrl_msg = msg->ctrl_msg;                                                  //消息的类型
     uint8_t control_type = msg->control_type;                                          //控件类型
-    uint16_t screen_id = PTR2U16(msg->screen_id);                                     //画面ID
-    uint16_t control_id = PTR2U16(msg->control_id);                                   //控件ID
-    uint32_t value = PTR2U32(msg->param);                                              //数值
-
-  
+    uint16_t screen_id = BIG2LITTLESWAP16(msg->screen_id);                                     //画面ID
+    uint16_t control_id = BIG2LITTLESWAP16(msg->control_id);                                   //控件ID
+    uint32_t value = BIG2LITTLESWAP32(msg->param);                                              //数值
+    
+    
     switch(cmd_type)                                                                
     {  
-    case NOTIFY_TOUCH_PRESS:                                                        //触摸屏按下
-    case NOTIFY_TOUCH_RELEASE:                                                      //触摸屏松开
-        gui_notify_touchxy(cmd_buffer[1],PTR2U16(cmd_buffer[2]),PTR2U16(cmd_buffer[4])); 
+        case NOTIFY_TOUCH_PRESS:                                                        //触摸屏按下
+        case NOTIFY_TOUCH_RELEASE:                                                      //触摸屏松开
+        gui_notify_touchxy(cmd_buffer[1],BIG2LITTLESWAP16(cmd_buffer[2]),BIG2LITTLESWAP16(cmd_buffer[4])); 
         break;                                                                    
-    case NOTIFY_WRITE_FLASH_OK:                                                     //写FLASH成功
+        case NOTIFY_WRITE_FLASH_OK:                                                     //写FLASH成功
         gui_notify_writeflash(1);                                                      
         break;                                                                    
-    case NOTIFY_WRITE_FLASH_FAILD:                                                  //写FLASH失败
+        case NOTIFY_WRITE_FLASH_FAILD:                                                  //写FLASH失败
         gui_notify_writeflash(0);                                                      
         break;                                                                    
-    case NOTIFY_READ_FLASH_OK:                                                      //读取FLASH成功
+        case NOTIFY_READ_FLASH_OK:                                                      //读取FLASH成功
         gui_notify_readflash(1,cmd_buffer+2,size-6);                                //去除帧头帧尾
         break;                                                                    
-    case NOTIFY_READ_FLASH_FAILD:                                                   //读取FLASH失败
+        case NOTIFY_READ_FLASH_FAILD:                                                   //读取FLASH失败
         gui_notify_readflash(0,0,0);                                                   
         break;                                                                    
-    case NOTIFY_READ_RTC:                                                           //读取RTC时间
+        case NOTIFY_READ_RTC:                                                           //读取RTC时间
         gui_notify_readrtc(cmd_buffer[2],cmd_buffer[3],cmd_buffer[4],cmd_buffer[5],cmd_buffer[6],cmd_buffer[7],cmd_buffer[8]);
         break;
-    case NOTIFY_CONTROL:															//控件更新通知															//控件更新通知
+        case NOTIFY_CONTROL:															//控件更新通知															//控件更新通知
         {
             if(ctrl_msg==MSG_GET_CURRENT_SCREEN)                                    //画面ID变化通知
             {
@@ -188,40 +188,44 @@ static void gui_Message_Process( PCTRL_MSG_t msg, uint16_t size )
             {
                 switch(control_type)
                 {
-                case kCtrlButton:                                                   //按钮控件
+                    case kCtrlButton:                                                   //按钮控件
                     gui_notify_button(screen_id,control_id,msg->param[1]);                  
                     break;                                                             
-                case kCtrlText:                                                     //文本控件
+                    case kCtrlText:                                                     //文本控件
                     gui_notify_text(screen_id,control_id,msg->param);                       
-                    break;                                                             
-                case kCtrlProgress:                                                 //进度条控件
+                    break;              
+                    case kCtrlProgress:                                                 //进度条控件
                     gui_notify_progress(screen_id,control_id,value);                        
                     break;                                                             
-                case kCtrlSlider:                                                   //滑动条控件
+                    case kCtrlSlider:                                                   //滑动条控件
                     gui_notify_slider(screen_id,control_id,value);                          
                     break;                                                             
-                case kCtrlMeter:                                                    //仪表控件
+                    case kCtrlMeter:                                                    //仪表控件
                     gui_notify_meter(screen_id,control_id,value);                           
                     break;                                                             
-                case kCtrlMenu:                                                     //菜单控件
+                    case kCtrlMenu:                                                     //菜单控件
                     gui_notify_menu(screen_id,control_id,msg->param[0],msg->param[1]);      
                     break;                                                              
-                case kCtrlSelector:                                                 //选择控件
+                    case kCtrlSelector:                                                 //选择控件
                     gui_notify_selector(screen_id,control_id,msg->param[0]);                
                     break;                                                              
-                case kCtrlRTC:                                                      //倒计时控件
+                    case kCtrlRTC:                                                      //倒计时控件
                     gui_notify_timer(screen_id,control_id);
                     break;
-                default:
+                    default:
                     break;
                 }
             } 
             break;  
         } 
-    case NOTIFY_HandShake:                                                          //握手通知                                                     
+        case MSG_GET_DATA:
+        {
+            gui_notify_getdata(screen_id,control_id,msg->param,s_CBvalue.getdata_buf);     
+        }
+        case NOTIFY_HandShake:                                                          //握手通知                                                     
         gui_notify_handshake();
         break;
-    default:
+        default:
         break;
     }
 }
@@ -240,7 +244,8 @@ static void gui_notify_handshake()
 */
 static void gui_notify_screen(uint16_t screen_id)
 {
-    s_CBvalue.current_screen_id = screen_id;    
+    s_CBvalue.current_screen_id = screen_id;
+    GuiTask_Send_Event(GUI_TASK_KEY_PROCESS_EVENT);    
 }
 /*! 
 *  \brief  触摸坐标事件响应
@@ -261,6 +266,14 @@ static void gui_notify_touchxy(uint8_t press,uint16_t x,uint16_t y)
 */
 static void gui_notify_button(uint16_t screen_id, uint16_t control_id, uint8_t  state)
 { 
+    switch (screen_id)
+    {
+        case FINGERMANAGESCREENID:
+        GUI_GetControlValue(FINGERMANAGESCREENID,TEXT5_VALUCONTROLCID);
+        break;
+        default:
+        break;
+    }
 }
 /*! 
 *  \brief  文本控件通知
@@ -272,7 +285,7 @@ static void gui_notify_button(uint16_t screen_id, uint16_t control_id, uint8_t  
 *  \param str 文本控件内容
 */
 static void gui_notify_text(uint16_t screen_id, uint16_t control_id, uint8_t *str)
-{
+{   
   //TODO: 添加用户代码                                                 
 }                                                                                
 
@@ -326,6 +339,7 @@ static void gui_notify_menu(uint16_t screen_id, uint16_t control_id, uint8_t ite
     {
         case TEXTVALUESCREENID:
         s_CBvalue.current_equip_id=item;
+        GuiTask_Send_Event(GUI_TASK_KEY_PROCESS_EVENT);
         break;
         default:
         break;
@@ -388,22 +402,35 @@ static void gui_notify_readrtc(uint8_t year,uint8_t month,uint8_t week,uint8_t d
 {
      //TODO: 添加用户代码
 }
-
+static void gui_notify_getdata(uint16_t screen_id, uint16_t control_id, uint8_t *str,uint8_t * dst)
+{
+    switch(*str)
+    {
+        case 0x11:
+        {   
+            str++;
+            while(*str)
+            {
+                *dst++=*str++;
+            }
+        }
+        default:
+        break;
+    }
+}
 
 /*! 
 *  \brief  更新数据
 */ 
 void GUI_Update(void)
 {   
-//    uint8_t a;
-//    a=s_CBvalue.current_screen_id;
     switch(s_CBvalue.current_screen_id)
     {
         case TEXTVALUESCREENID:
         text_screen_update_event();
         break;
         case FINGERMANAGESCREENID:
-        
+       
         break;
        
         case CONFIGSCREENID:
@@ -415,10 +442,30 @@ void GUI_Update(void)
 }
 static void text_screen_update_event()
 {   
-    
-    GUI_TEXT_SetFloat(TEXTVALUESCREENID,TEXT1_VALUCONTROLCID,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].tem,1,1);
-    GUI_TEXT_SetFloat(TEXTVALUESCREENID,TEXT2_VALUCONTROLCID,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].pre,1,1);
-    GUI_TEXT_SetFloat(TEXTVALUESCREENID,TEXT3_VALUCONTROLCID,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].water,1,1);        
+      uint8_t sprint_buf[100];
+      GUI_GIF_Pause(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);  
+      sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].tem/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].tem/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].tem%10);
+      GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT1_VALUCONTROLCID,sprint_buf);
+      sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].pre/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].pre/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].pre%10);
+      GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT2_VALUCONTROLCID,sprint_buf);
+      sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].water/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].water/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].water%10);
+      GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT3_VALUCONTROLCID,sprint_buf);
+      if(g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].run_state==1)
+      {
+          sprintf((char *)sprint_buf,"运行中");
+          GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT4_VALUCONTROLCID,sprint_buf);
+          GUI_Animation_PlayFrame(TEXTVALUESCREENID,Frame1_VALUCONTROLCID,0);
+          GUI_GIF_Stop(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);
+          GUI_GIF_Start(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);
+      }
+      else 
+      {
+
+          sprintf((char *)sprint_buf,"未启动");
+          GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT4_VALUCONTROLCID,sprint_buf);
+          GUI_Animation_PlayFrame(TEXTVALUESCREENID,Frame1_VALUCONTROLCID,1);
+          GUI_GIF_Stop(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);  
+      }
 }
 /**
  * @}

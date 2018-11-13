@@ -12,7 +12,7 @@ ByteLimit=50
 stlinkserialNo=711106B3
 stlinkfoundProbes=
 [DebugChecksum]
-Checksum=-710369391
+Checksum=-1822411522
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -40,11 +40,14 @@ ITMportsTermIO=0
 ITMportsLogFile=0
 ITMlogFile=$PROJ_DIR$\ITM.log
 [array_types]
-Fmt0=uint8_t[512]	4	0
-Fmt1=uint8_t[64]	4	0
+Fmt0=uint8_t[300]	4	0
+Fmt1=uint8_t[512]	4	0
+Fmt2=uint8_t[64]	4	0
 [watch_formats]
 Fmt0={W}1:cmd_type	4	0
 Fmt1={W}1:data	4	0
+Fmt2={W}1:msg->screen_id	4	0
+Fmt3={W}1:screen_id	4	0
 [Trace2]
 Enabled=0
 ShowSource=0
@@ -90,8 +93,8 @@ ShowTiming=1
 [Disassemble mode]
 mode=0
 [Breakpoints2]
-Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Source\FML\GUI\gui_process.c}.400.5" 0 0 1 "" 0 "" 0
-Bp1=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Source\application\stm32f4xx_it.c}.153.5" 0 0 1 "" 0 "" 0
+Bp0=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Source\application\stm32f4xx_it.c}.69.3" 0 0 1 "" 0 "" 0
+Bp1=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Source\FML\GUI\gui_process.c}.144.1" 0 0 1 "" 0 "" 0
 Count=2
 [Aliases]
 A0=_ "C:\Users\Administrator\Desktop\²É¿Ø\Components\CMSIS\Device\ST\STM32F4xx\Source\Templates\iar\startup_stm32f429_439xx.s" ""

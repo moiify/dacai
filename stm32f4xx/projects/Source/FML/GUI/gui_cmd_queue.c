@@ -163,7 +163,7 @@ uint16_t GUI_Queue_Find_Cmd(uint8_t *buffer,uint16_t buf_len)
         //取一个数据
         gui_queue_pop(&data);
 
-        if(s_cmd_pos==0&&data!=CMD_HEAD)                               //指令第一个字节必须是帧头，否则跳过
+        if(s_cmd_pos==0&&data!=CMD_HEAD)                               //指令第一个字节必须是帧头，否则跳过adfasdfas
         {
             continue;
         }

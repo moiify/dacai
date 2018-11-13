@@ -2293,6 +2293,9 @@
     <name>fml</name>
     <group>
       <name>GUI</name>
+      <group>
+        <name>GUI_Driver</name>
+      </group>
       <file>
         <name>$PROJ_DIR$\..\Source\FML\GUI\gui_cmd_queue.c</name>
       </file>

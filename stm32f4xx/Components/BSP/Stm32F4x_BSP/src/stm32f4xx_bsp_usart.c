@@ -118,7 +118,7 @@ void BSP_USART_Open(uint8_t BSP_USARTx)
         
         /* Configure USART Tx and Rx as alternate function push-pull */
         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
         GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
         GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
         GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
@@ -140,7 +140,7 @@ void BSP_USART_Open(uint8_t BSP_USARTx)
         /* Enable USART Interrupt */
         NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
         NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
-        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
         NVIC_Init(&NVIC_InitStructure);
         USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);            
         
@@ -172,6 +172,11 @@ void  BSP_USART_IRQHandler(uint8_t BSP_USARTx)
     {
         uint8_t data = USART_ReceiveData(USART1);
         GUI_Queue_Push(data);
+    }
+    if(USART_GetITStatus(USART1,USART_IT_ORE_RX)!= RESET) // ºÏ≤È ORE ±Í÷æ
+    {
+        //USART_ClearFlag(USART1,USART_FLAG_ORE);
+        USART_ReceiveData(USART1);
     }
 }
 /**

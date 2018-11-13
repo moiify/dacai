@@ -251,7 +251,7 @@
         </option>
         <option>
           <name>CCDebugInfo</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>IEndianMode</name>
@@ -2136,6 +2136,9 @@
     <name>fml</name>
     <group>
       <name>GUI</name>
+      <group>
+        <name>GUI_Driver</name>
+      </group>
       <file>
         <name>$PROJ_DIR$\..\Source\FML\GUI\gui_cmd_queue.c</name>
       </file>

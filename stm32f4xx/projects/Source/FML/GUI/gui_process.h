@@ -27,14 +27,12 @@
  * @defgroup      gui_process_Exported_Macros 
  * @{  
  */
-#define PTR2U16(PTR) (((uint16_t)(PTR) & 0x00ff) << 8) | (((uint16_t)(PTR) & 0xff00) >> 8)  //从缓冲区取16位数据 小端
-#define PTR2U32(PTR) ((((uint8_t *)(PTR))[0]<<24)|(((uint8_t *)(PTR))[1]<<16)|(((uint8_t *)(PTR))[2]<<8)|((uint8_t *)(PTR))[3])  //从缓冲区取32位数据 小端
- 
-//    (uint_32)((((uint_32)(x) & 0xff000000) >> 24) | \
-//              (((uint_32)(x) & 0x00ff0000) >> 8) | \
-//              (((uint_32)(x) & 0x0000ff00) << 8) | \
-//              (((uint_32)(x) & 0x000000ff) << 24) \
-//             )
+#define BIG2LITTLESWAP16(x) (((uint16_t)(x) & 0x00ff) << 8) | (((uint16_t)(x) & 0xff00) >> 8)  //从缓冲区取16位数据 小端
+#define BIG2LITTLESWAP32(x) ((((uint32_t)(x) & 0xff000000) >> 24) | \
+                                                       (((uint32_t)(x) & 0x00ff0000) >> 8) | \
+                                                       (((uint32_t)(x) & 0x0000ff00) << 8) | \
+                                                       (((uint32_t)(x) & 0x000000ff) << 24)) //从缓冲区取32位数据 小端
+
 /**
  * @}
  */
@@ -81,6 +79,7 @@ enum CtrlType
     kCtrlSelector,                        //选择控件
     kCtrlQRCode,                          //二维码
 };
+
 #pragma pack(1)                           //按字节对齐
 typedef struct
 {
@@ -95,8 +94,7 @@ typedef struct
     uint8_t    param[256];                  //可变长度参数，最多256个字节
 
     uint8_t  cmd_tail[4];                   //帧尾
-}CTRL_MSG_t,*PCTRL_MSG_t;
-
+}GUI_Dacai_Proto_t;
 #pragma pack()
 
 /**

@@ -69,10 +69,10 @@ typedef enum
 
 typedef struct
 {
-    float tem;
-    float pre;
-    float water;
-    
+    uint16_t tem;
+    uint16_t pre;
+    uint16_t water;
+    uint8_t  run_state;
 }equip_info_t;
 
 

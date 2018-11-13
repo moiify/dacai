@@ -108,15 +108,18 @@
  */
 int16_t SystemParam_Init(void)
 {   
-    g_SystemInfo.Equip_Info[0].pre=50.3;
-    g_SystemInfo.Equip_Info[0].tem=20.9;
-    g_SystemInfo.Equip_Info[0].water=3.4;
-    g_SystemInfo.Equip_Info[1].pre=41.3;
-    g_SystemInfo.Equip_Info[1].tem=21.2;
-    g_SystemInfo.Equip_Info[1].water=0.7; 
-    g_SystemInfo.Equip_Info[2].pre=75.8;
-    g_SystemInfo.Equip_Info[2].tem=18.7;
-    g_SystemInfo.Equip_Info[2].water=1.1;     
+    g_SystemInfo.Equip_Info[0].pre=5031;
+    g_SystemInfo.Equip_Info[0].tem=2092;
+    g_SystemInfo.Equip_Info[0].water=343;
+    g_SystemInfo.Equip_Info[0].run_state=1;
+    g_SystemInfo.Equip_Info[1].pre=4134;
+    g_SystemInfo.Equip_Info[1].tem=2125;
+    g_SystemInfo.Equip_Info[1].water=76; 
+    g_SystemInfo.Equip_Info[1].run_state=0;
+    g_SystemInfo.Equip_Info[2].pre=7587;
+    g_SystemInfo.Equip_Info[2].tem=1878;
+    g_SystemInfo.Equip_Info[2].water=119;
+    g_SystemInfo.Equip_Info[2].run_state=1;    
     return 0;
 }
 

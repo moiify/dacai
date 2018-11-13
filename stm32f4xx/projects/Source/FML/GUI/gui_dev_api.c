@@ -49,7 +49,7 @@ static void gui_SendHeadCMD()
 }
 static void gui_SendEndCMD()
 {   
-    uint8_t buf[]={0xff,0xcf,0xff,0xff};
+    uint8_t buf[]={0xff,0xfc,0xff,0xff};
     BSP_LCD_WriteBytes(buf,4);
 }
 
@@ -689,7 +689,7 @@ uint32_t GetStringLen(uint8_t *str)
     return (str-p);
 } 
 /*! 
-*  \brief     批量更新文本控件
+*  \brief  批量更新文本控件
 *  \param  control_id 控件ID
 *  \param  strings 字符串
 */
