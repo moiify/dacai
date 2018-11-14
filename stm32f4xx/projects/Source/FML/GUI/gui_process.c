@@ -1,105 +1,109 @@
 /**
- **************************************************************************************************
- * @file        gui_process.c
- * @author
- * @version   v0.1.0
- * @date        
- * @brief
- **************************************************************************************************
- * @attention
- *
- **************************************************************************************************
- */
+**************************************************************************************************
+* @file        gui_process.c
+* @author
+* @version   v0.1.0
+* @date        
+* @brief
+**************************************************************************************************
+* @attention
+*
+**************************************************************************************************
+*/
 #include "gui_cmd_queue.h"
 #include "gui_process.h"
-#include "gui_dev_api.h"
+#include "gui_conf.h"
 #include "system_info.h"
 #include "stm32_bsp_conf.h"
 #include "gui_task.h"
 /**
- * @addtogroup    XXX 
- * @{  
- */
+* @addtogroup    XXX 
+* @{  
+*/
 
 /**
- * @addtogroup    gui_process_Modules 
- * @{  
- */
+* @addtogroup    gui_process_Modules 
+* @{  
+*/
 
 /**
- * @defgroup      gui_process_IO_Defines 
- * @brief         
- * @{  
- */
+* @defgroup      gui_process_IO_Defines 
+* @brief         
+* @{  
+*/
 
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @defgroup      gui_process_Macros_Defines 
- * @brief         
- * @{  
- */
+* @defgroup      gui_process_Macros_Defines 
+* @brief         
+* @{  
+*/
 
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @defgroup      gui_process_Constants_Defines 
- * @brief         
- * @{  
- */
+* @defgroup      gui_process_Constants_Defines 
+* @brief         
+* @{  
+*/
 
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @defgroup      gui_process_Private_Types
- * @brief         
- * @{  
- */
+* @defgroup      gui_process_Private_Types
+* @brief         
+* @{  
+*/
 typedef struct
 {
     uint8_t current_screen_id;
     uint8_t current_equip_id;
-    uint8_t getdata_buf[50];
+    uint8_t finger_name_buf[10];
+    uint8_t finger_id_buf[10];
 }s_CBvalue_t;
 
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @defgroup      gui_process_Private_Variables 
- * @brief         
- * @{  
- */ 
+* @defgroup      gui_process_Private_Variables 
+* @brief         
+* @{  
+*/ 
 uint8_t cmd_buffer[CMD_MAX_SIZE];                                                     //指令缓存
 
-s_CBvalue_t s_CBvalue={
- .current_screen_id=99,}; 
+s_CBvalue_t s_CBvalue=
+{
+    .current_screen_id=99,
+    .current_equip_id=1,
+}; 
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @defgroup      gui_process_Public_Variables 
- * @brief         
- * @{  
- */
+* @defgroup      gui_process_Public_Variables 
+* @brief         
+* @{  
+*/
 
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @defgroup      gui_process_Private_FunctionPrototypes 
- * @brief         
- * @{  
- */
+* @defgroup      gui_process_Private_FunctionPrototypes 
+* @brief         
+* @{  
+*/
 static void gui_Message_Process( GUI_Dacai_Proto_t * msg, uint16_t size );
 static void gui_notify_handshake();
 static void gui_notify_screen(uint16_t screen_id);
@@ -115,46 +119,46 @@ static void gui_notify_timer(uint16_t screen_id, uint16_t control_id);
 static void gui_notify_readflash(uint8_t status,uint8_t *_data,uint16_t length);
 static void gui_notify_writeflash(uint8_t status);
 static void gui_notify_readrtc(uint8_t year,uint8_t month,uint8_t week,uint8_t day,uint8_t hour,uint8_t minute,uint8_t second);
-static void gui_notify_getdata(uint16_t screen_id, uint16_t control_id, uint8_t *str,uint8_t *dst); 
 static void text_screen_update_event();
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @defgroup      gui_process_Functions 
- * @brief         
- * @{  
+* @defgroup      gui_process_Functions 
+* @brief         
+* @{  
+*/
+/**
+ * @brief    循环检查是否存在命令
  */
+
 void Gui_CheckCMD_Loop_Process()
 {   
     uint16_t size=0;
     
     size = GUI_Queue_Find_Cmd(cmd_buffer,CMD_MAX_SIZE);                          //从缓冲区中获取一条指令         
     
-    if(size>0&&cmd_buffer[1]!=0x07)                                              //接收到指令 ，及判断是否为开机提示
+    if(size>0)                                              					 //接收到指令
     {                                                                           
-        gui_Message_Process((GUI_Dacai_Proto_t *)cmd_buffer, size);                      //指令处理
+        gui_Message_Process((GUI_Dacai_Proto_t *)cmd_buffer, size);              //指令处理
     }                                                                           
-    else if(size>0&&cmd_buffer[1]==0x07)                                         //如果为指令0x07就软重置STM32  
-    {                                                                           
-        __disable_fault_irq();                                                   
-        NVIC_SystemReset();                                                                                                                                          
-    }      
 }
-///*! 
-//*  \brief  消息处理流程
-//*  \param msg 待处理消息
-//*  \param size 消息长度
-//*
+
+/**
+ * @brief    消息处理流程
+ * @param    msg:GUI_Dacai_Proto_t*  待处理消息
+ * @param    size:uint16_t 消息长度
+ */
+
 static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
 {
     uint8_t cmd_type = msg->cmd_type;                                                  //指令类型
     uint8_t ctrl_msg = msg->ctrl_msg;                                                  //消息的类型
     uint8_t control_type = msg->control_type;                                          //控件类型
-    uint16_t screen_id = BIG2LITTLESWAP16(msg->screen_id);                                     //画面ID
-    uint16_t control_id = BIG2LITTLESWAP16(msg->control_id);                                   //控件ID
-    uint32_t value = BIG2LITTLESWAP32(msg->param);                                              //数值
+    uint16_t screen_id = BIG2LITTLESWAP16(msg->screen_id);                             //画面ID
+    uint16_t control_id = BIG2LITTLESWAP16(msg->control_id);                           //控件ID
+    uint32_t value = BIG2LITTLESWAP32(msg->param);                                     //数值
     
     
     switch(cmd_type)                                                                
@@ -170,7 +174,7 @@ static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
         gui_notify_writeflash(0);                                                      
         break;                                                                    
         case NOTIFY_READ_FLASH_OK:                                                      //读取FLASH成功
-        gui_notify_readflash(1,cmd_buffer+2,size-6);                                //去除帧头帧尾
+        gui_notify_readflash(1,cmd_buffer+2,size-6);                              	    //去除帧头帧尾
         break;                                                                    
         case NOTIFY_READ_FLASH_FAILD:                                                   //读取FLASH失败
         gui_notify_readflash(0,0,0);                                                   
@@ -180,7 +184,7 @@ static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
         break;
         case NOTIFY_CONTROL:															//控件更新通知															//控件更新通知
         {
-            if(ctrl_msg==MSG_GET_CURRENT_SCREEN)                                    //画面ID变化通知
+            if(ctrl_msg==MSG_GET_CURRENT_SCREEN)                                   		 //画面ID变化通知
             {
                 gui_notify_screen(screen_id);                                            //画面切换调动的函数
             }
@@ -218,10 +222,6 @@ static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
             } 
             break;  
         } 
-        case MSG_GET_DATA:
-        {
-            gui_notify_getdata(screen_id,control_id,msg->param,s_CBvalue.getdata_buf);     
-        }
         case NOTIFY_HandShake:                                                          //握手通知                                                     
         gui_notify_handshake();
         break;
@@ -229,19 +229,21 @@ static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
         break;
     }
 }
-/*! 
-*  \brief  握手通知
-*/
+
+/**
+ * @brief    握手通知
+ */
+
 static void gui_notify_handshake()
 {
-
+    
 }
 
-/*! 
-*  \brief  画面切换通知
-*  \details  当前画面改变时(或调用GetScreen)，执行此函数
-*  \param screen_id 当前画面ID
-*/
+/**
+ * @brief    画面切换通知
+ * @param    screen_id:uint16_t 当前画面ID
+ */
+
 static void gui_notify_screen(uint16_t screen_id)
 {
     s_CBvalue.current_screen_id = screen_id;
@@ -269,7 +271,8 @@ static void gui_notify_button(uint16_t screen_id, uint16_t control_id, uint8_t  
     switch (screen_id)
     {
         case FINGERMANAGESCREENID:
-        GUI_GetControlValue(FINGERMANAGESCREENID,TEXT5_VALUCONTROLCID);
+//        GUI_TEXT_GetValue(FINGERMANAGESCREENID,FINGER_NAME_VALUCONTROLCID);
+//        GUI_TEXT_GetValue(FINGERMANAGESCREENID,FINGER_ID_VALUCONTROLCID);
         break;
         default:
         break;
@@ -286,9 +289,35 @@ static void gui_notify_button(uint16_t screen_id, uint16_t control_id, uint8_t  
 */
 static void gui_notify_text(uint16_t screen_id, uint16_t control_id, uint8_t *str)
 {   
-  //TODO: 添加用户代码                                                 
-}                                                                                
-
+    uint8_t i=0;
+    switch(screen_id)
+    {
+        case FINGERMANAGESCREENID:
+        switch(control_id)
+        {
+            case FINGER_NAME_VALUCONTROLCID:
+            {
+                while(*str)
+                {
+                    s_CBvalue.finger_name_buf[i++]=*str++;
+                }
+                s_CBvalue.finger_name_buf[i]=0; 
+            }
+            case FINGER_ID_VALUCONTROLCID:
+            {
+                while(*str)
+                {
+                    s_CBvalue.finger_id_buf[i++]=*str++;
+                }
+                s_CBvalue.finger_id_buf[i]=0; 
+            }
+            default:
+            break;
+        }
+        default:
+        break;                              
+    }                                 
+}
 /*!                                                                              
 *  \brief  进度条控件通知                                                       
 *  \details  调用GetControlValue时，执行此函数                                  
@@ -298,7 +327,7 @@ static void gui_notify_text(uint16_t screen_id, uint16_t control_id, uint8_t *st
 */                                                                              
 static void gui_notify_progress(uint16_t screen_id, uint16_t control_id, uint32_t value)           
 {  
-   //TODO: 添加用户代码
+    //TODO: 添加用户代码
 }                                                                                
 
 /*!                                                                              
@@ -338,7 +367,7 @@ static void gui_notify_menu(uint16_t screen_id, uint16_t control_id, uint8_t ite
     switch(screen_id)
     {
         case TEXTVALUESCREENID:
-        s_CBvalue.current_equip_id=item;
+        s_CBvalue.current_equip_id=item+1;
         GuiTask_Send_Event(GUI_TASK_KEY_PROCESS_EVENT);
         break;
         default:
@@ -355,7 +384,7 @@ static void gui_notify_menu(uint16_t screen_id, uint16_t control_id, uint8_t ite
 */
 static void gui_notify_selector(uint16_t screen_id, uint16_t control_id, uint8_t  item)
 {
-   
+    
 }
 
 /*! 
@@ -365,7 +394,7 @@ static void gui_notify_selector(uint16_t screen_id, uint16_t control_id, uint8_t
 */
 static void gui_notify_timer(uint16_t screen_id, uint16_t control_id)
 {
-  //TODO: 添加用户代码   
+    //TODO: 添加用户代码   
 }
 
 /*! 
@@ -400,24 +429,9 @@ static void gui_notify_writeflash(uint8_t status)
 */
 static void gui_notify_readrtc(uint8_t year,uint8_t month,uint8_t week,uint8_t day,uint8_t hour,uint8_t minute,uint8_t second)
 {
-     //TODO: 添加用户代码
+    //TODO: 添加用户代码
 }
-static void gui_notify_getdata(uint16_t screen_id, uint16_t control_id, uint8_t *str,uint8_t * dst)
-{
-    switch(*str)
-    {
-        case 0x11:
-        {   
-            str++;
-            while(*str)
-            {
-                *dst++=*str++;
-            }
-        }
-        default:
-        break;
-    }
-}
+
 
 /*! 
 *  \brief  更新数据
@@ -430,9 +444,8 @@ void GUI_Update(void)
         text_screen_update_event();
         break;
         case FINGERMANAGESCREENID:
-       
         break;
-       
+        
         case CONFIGSCREENID:
         
         break;
@@ -442,40 +455,47 @@ void GUI_Update(void)
 }
 static void text_screen_update_event()
 {   
-      uint8_t sprint_buf[100];
-      GUI_GIF_Pause(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);  
-      sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].tem/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].tem/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].tem%10);
-      GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT1_VALUCONTROLCID,sprint_buf);
-      sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].pre/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].pre/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].pre%10);
-      GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT2_VALUCONTROLCID,sprint_buf);
-      sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].water/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].water/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].water%10);
-      GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT3_VALUCONTROLCID,sprint_buf);
-      if(g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id].run_state==1)
-      {
-          sprintf((char *)sprint_buf,"运行中");
-          GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT4_VALUCONTROLCID,sprint_buf);
-          GUI_Animation_PlayFrame(TEXTVALUESCREENID,Frame1_VALUCONTROLCID,0);
-          GUI_GIF_Stop(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);
-          GUI_GIF_Start(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);
-      }
-      else 
-      {
-
-          sprintf((char *)sprint_buf,"未启动");
-          GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT4_VALUCONTROLCID,sprint_buf);
-          GUI_Animation_PlayFrame(TEXTVALUESCREENID,Frame1_VALUCONTROLCID,1);
-          GUI_GIF_Stop(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);  
-      }
+    uint8_t sprint_buf[100];
+    GUI_TEXT_SetInt32(TEXTVALUESCREENID,EQUIP_ID_VALUEID,s_CBvalue.current_equip_id,0,4);
+    GUI_GIF_Pause(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);  
+    sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].tem/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].tem/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].tem%10);
+    GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT1_VALUCONTROLCID,sprint_buf);
+    sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].pre/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].pre/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].pre%10);
+    GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT2_VALUCONTROLCID,sprint_buf);
+    sprintf((char *)sprint_buf,"%d.%d%d",g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].water/100,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].water/10%10,g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].water%10);
+    GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT3_VALUCONTROLCID,sprint_buf);
+    GUI_Record_SetEvent(RECORDSCREENID,RECORDCONTROLID,0,0);
+    GUI_Record_SetEvent(RECORDSCREENID,RECORDCONTROLID,1,0);
+    GUI_Record_SetEvent(RECORDSCREENID,RECORDCONTROLID,2,0);
+    GUI_Record_SetEvent(RECORDSCREENID,RECORDCONTROLID,3,0);
+    GUI_Record_SetEvent(RECORDSCREENID,RECORDCONTROLID,4,0);
+    GUI_Record_SetEvent(RECORDSCREENID,RECORDCONTROLID,5,0);
+    if(g_SystemInfo.Equip_Info[s_CBvalue.current_equip_id-1].run_state==1)
+    {
+        sprintf((char *)sprint_buf,"运行中");
+        GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT4_VALUCONTROLCID,sprint_buf);
+        GUI_Icon_PlayFrame(TEXTVALUESCREENID,Frame1_VALUCONTROLCID,0);
+        GUI_GIF_Stop(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);
+        GUI_GIF_Start(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);
+    }
+    else 
+    {
+        
+        sprintf((char *)sprint_buf,"未启动");
+        GUI_TEXT_SetText(TEXTVALUESCREENID,TEXT4_VALUCONTROLCID,sprint_buf);
+        GUI_Icon_PlayFrame(TEXTVALUESCREENID,Frame1_VALUCONTROLCID,1);
+        GUI_GIF_Stop(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);  
+    }
 }
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @}
- */
+* @}
+*/
 
 /**
- * @}
- */
+* @}
+*/
 

@@ -16,6 +16,15 @@
 //创建画面删除指纹的命令索引ID
 #define  _SCREEN_删除指纹                                                          5
 
+//创建画面数据曲线的命令索引ID
+#define  _SCREEN_数据曲线                                                          6
+
+//创建画面数据表格的命令索引ID
+#define  _SCREEN_数据表格                                                          7
+
+//创建画面参数配置的命令索引ID
+#define  _SCREEN_参数配置                                                          8
+
 //画面开机界面中动画控件Animation1使用的图片
 #define  _IMG_开机界面_ANIMATION1                                                  0
 
@@ -85,6 +94,8 @@
 
 #define  _ANIMATION_设备信息_ANIMATION1                                           20
 
+#define  _TXT_DIS__设备信息_TEXT_DISPLAY6                                         22
+
 //画面指纹管理中图片Image1使用的图片
 #define  _IMG_指纹管理_IMAGE1                                                      6
 
@@ -120,4 +131,11 @@
 
 //画面删除指纹中图片Image1使用的图片
 #define  _IMG_删除指纹_IMAGE1                                                     10
+
+#define  _RECORD_数据表格_RECORD1                                                  1
+
+#define  _BTN_数据表格_BUTTON1                                                     5
+
+//画面数据表格中图片Image1使用的图片
+#define  _IMG_数据表格_IMAGE1                                                      2
 

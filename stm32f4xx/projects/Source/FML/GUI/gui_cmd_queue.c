@@ -12,7 +12,7 @@
  */
 #include "self_def.h"
 #include "gui_cmd_queue.h"
-#include "gui_dev_api.h"
+#include "gui_conf.h"
 #include "crc.h"
 /**
  * @addtogroup    XXX 
@@ -51,6 +51,7 @@
  */
 #define CMD_HEAD 0XEE                                                  //֡ͷ
 #define CMD_TAIL 0XFFFCFFFF                                            //֡β
+#define QUEUE_MAX_SIZE              512
 /**
  * @}
  */

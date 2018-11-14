@@ -25,7 +25,7 @@ if not "%1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\settings\Stm32F4x.Debug.general.xcl" --backend -f "C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\settings\Stm32F4x.Debug.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\Administrator\Desktop\ZSCA-9Z01-S1\stm32f4xx\projects\IAR\settings\Stm32F4x.Debug.general.xcl" --backend -f "C:\Users\Administrator\Desktop\ZSCA-9Z01-S1\stm32f4xx\projects\IAR\settings\Stm32F4x.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\settings\Stm32F4x.Debug.general.xcl" "--debug_file=%1" --backend -f "C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\settings\Stm32F4x.Debug.driver.xcl" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\common\bin\cspybat" -f "C:\Users\Administrator\Desktop\ZSCA-9Z01-S1\stm32f4xx\projects\IAR\settings\Stm32F4x.Debug.general.xcl" "--debug_file=%1" --backend -f "C:\Users\Administrator\Desktop\ZSCA-9Z01-S1\stm32f4xx\projects\IAR\settings\Stm32F4x.Debug.driver.xcl" 
 
 @echo off 
 :end

@@ -140,7 +140,7 @@ void BSP_USART_Open(uint8_t BSP_USARTx)
         /* Enable USART Interrupt */
         NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
         NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
-        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+        NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
         NVIC_Init(&NVIC_InitStructure);
         USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);            
         

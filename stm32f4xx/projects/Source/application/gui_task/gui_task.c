@@ -115,7 +115,7 @@ osal_event_t GuiTask_Process(uint8_t taskid,osal_event_t events)
     if (events & GUI_TASK_KEY_PROCESS_EVENT)
     {   
         GUI_Update();
-//        OS_Timer_Start(g_GuiTask_Id, GUI_TASK_KEY_PROCESS_EVENT,500);
+//      OS_Timer_Start(g_GuiTask_Id, GUI_TASK_KEY_PROCESS_EVENT,500);
         return events ^ GUI_TASK_KEY_PROCESS_EVENT;
     }
     if (events & GUI_TASK_LOOP_EVENT)

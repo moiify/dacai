@@ -1,8 +1,8 @@
 "D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\bin\armproc.dll" 
 
-"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\bin\armstlink.dll" 
+"D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\bin\armjlink.dll" 
 
-"C:\Users\Administrator\Desktop\dacai\stm32f4xx\projects\IAR\Debug\Exe\c.out" 
+"C:\Users\Administrator\Desktop\ZSCA-9Z01-S1\stm32f4xx\projects\IAR\Debug\Exe\c.out" 
 
 --plugin "D:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2\arm\bin\armbat.dll" 
 
