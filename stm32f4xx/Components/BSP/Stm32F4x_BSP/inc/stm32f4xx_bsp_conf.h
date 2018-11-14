@@ -67,7 +67,6 @@
 
 #if BSP_EXTI_MODULE_ENABLE == 1
 #include "stm32f4xx_bsp_exti.h"
-#include "stm32f4xx_bsp_exti_conf.h"
 #endif
 
 #if BSP_FLASH_MODULE_ENABLE == 1
@@ -76,7 +75,6 @@
 
 #if BSP_SPI_MODULE_ENABLE == 1
 #include "stm32f4xx_bsp_spi.h"
-#include "stm32f4xx_bsp_spi_conf.h"
 #endif
 
 #if BSP_TIM_MODULE_ENABLE == 1
@@ -85,27 +83,22 @@
 
 #if BSP_ADC_MODULE_ENABLE == 1
 #include "stm32f4xx_bsp_adc.h"
-#include "stm32f4xx_bsp_adc_conf.h"
 #endif
 
 #if BSP_RTC_MODULE_ENABLE == 1
 #include "stm32f4xx_bsp_rtc.h"
-#include "stm32f4xx_bsp_rtc_conf.h"
 #endif
 
 #if BSP_WDG_MODULE_ENABLE == 1
 #include "stm32f4xx_bsp_wdg.h"
-#include "stm32f4xx_bsp_wdg_conf.h"
 #endif
 
 #if BSP_I2CSW_MODULE_ENABLE == 1
 #include "stm32f4xx_bsp_i2c_sw.h"
-#include "stm32f4xx_bsp_i2c_sw_conf.h"
 #endif
 
 #if BSP_PWM_MODULE_ENABLE == 1
 #include "stm32f4xx_bsp_pwm.h"
-#include "stm32f4xx_bsp_pwm_conf.h"
 #endif
 /**
  * @}

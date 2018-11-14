@@ -54,7 +54,9 @@
  * @defgroup      gui_general_Exported_Variables 
  * @{  
  */
-
+extern void (*GUI_TOUCH_CallBack)(uint8_t press,uint16_t x,uint16_t y);
+extern void (*GUI_HANDSHAKE_CallBack)();
+extern void (*GUI_SCREEN_CallBack)(uint16_t screen_id);
 /**
  * @}
  */
@@ -80,6 +82,9 @@ void GUI_TestTouchPane();
 void GUI_LockDeviceConfig(void);
 void GUI_UnlockDeviceConfig(void);
 void GUI_SetCommBps(uint8_t option);
+void GUI_SetTouchCallback(void (*recv)(uint8_t press,uint16_t x,uint16_t y));
+void GUI_SetHandShakeCallback(void (*recv)());
+void GUI_SetScreenCallback(void (*recv)(uint16_t screen_id));
 /**
  * @}
  */

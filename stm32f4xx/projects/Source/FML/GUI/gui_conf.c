@@ -11,10 +11,7 @@
  **************************************************************************************************
  */
 
-#include "self_def.h"
-#include "bsp_lcd.h"
 #include "gui_conf.h"
-
 
 /**
  * @addtogroup    XXX 
@@ -101,22 +98,6 @@
  * @brief         
  * @{  
  */
-#if(CRC16_ENABLE)
-
-#else
-
-void GUI_SendHeadCMD()
-{   
-    BSP_LCD_WriteByte(0XEE);
-}
-void GUI_SendEndCMD()
-{   
-    uint8_t buf[]={0xff,0xfc,0xff,0xff};
-    BSP_LCD_WriteBytes(buf,4);
-}
-
-#endif
-
 /**
  * @}
  */

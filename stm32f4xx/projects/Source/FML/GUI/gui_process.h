@@ -62,7 +62,7 @@
  * @defgroup      gui_process_Exported_Types 
  * @{  
  */
-enum CtrlType
+typedef enum 
 {
     kCtrlUnknown=0x0,
     kCtrlButton=0x10,                     //按钮
@@ -72,13 +72,13 @@ enum CtrlType
     kCtrlMeter,                            //仪表
     kCtrlDropList,                        //下拉列表
     kCtrlAnimation,                       //动画
-    kCtrlRTC,                             //时间显示
+    kCtrlTimer,                           //定时器控件
     kCtrlGraph,                           //曲线图控件
     kCtrlTable,                           //表格控件
     kCtrlMenu,                            //菜单控件
     kCtrlSelector,                        //选择控件
     kCtrlQRCode,                          //二维码
-};
+}CtrlType_e;
 
 #pragma pack(1)                           //按字节对齐
 typedef struct

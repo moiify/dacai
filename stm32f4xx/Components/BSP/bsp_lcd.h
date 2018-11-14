@@ -22,7 +22,7 @@
  * @addtogroup    bsp_lcd_Modules 
  * @{  
  */
-
+#include "self_def.h"
 /**
  * @defgroup      bsp_lcd_Exported_Macros 
  * @{  

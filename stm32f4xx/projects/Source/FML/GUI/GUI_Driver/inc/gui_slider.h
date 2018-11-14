@@ -54,7 +54,7 @@
  * @defgroup      gui_slider_Exported_Variables 
  * @{  
  */
-
+extern void (*GUI_SLIDER_CallBack)(uint16_t screen_id, uint16_t control_id, uint32_t value);
 /**
  * @}
  */
@@ -64,7 +64,7 @@
  * @{  
  */
 void GUI_Slider_SetValue(uint16_t screen_id,uint16_t control_id,uint32_t value);
-void GUI_SetProgressValue(uint16_t screen_id,uint16_t control_id,uint32_t value);
+void GUI_SetSliderCallback(void (*recv)(uint16_t screen_id, uint16_t control_id, uint32_t value));
 /**
  * @}
  */

@@ -164,9 +164,9 @@
 						<F N="../../../Components/BSP/Stm32F4x_BSP/inc/stm32f4xx_bsp_usart.h"/>
 					</Folder>
 					<Folder Name="src">
-						<F N="../../../Components/BSP/Stm32F4x_BSP/src/stm32f0xx_bsp_flash.c"/>
-						<F N="../../../Components/BSP/Stm32F4x_BSP/src/stm32f0xx_bsp_nvic.c"/>
 						<F N="../../../Components/BSP/Stm32F4x_BSP/src/stm32f4xx_bsp_dma.c"/>
+						<F N="../../../Components/BSP/Stm32F4x_BSP/src/stm32f4xx_bsp_exti.c"/>
+						<F N="../../../Components/BSP/Stm32F4x_BSP/src/stm32f4xx_bsp_flash.c"/>
 						<F N="../../../Components/BSP/Stm32F4x_BSP/src/stm32f4xx_bsp_gpio.c"/>
 						<F N="../../../Components/BSP/Stm32F4x_BSP/src/stm32f4xx_bsp_nvic.c"/>
 						<F N="../../../Components/BSP/Stm32F4x_BSP/src/stm32f4xx_bsp_systick.c"/>
@@ -1009,6 +1009,10 @@
 		</Folder>
 		<Folder Name="../../Source">
 			<Folder Name="application">
+				<Folder Name="finger_task">
+					<F N="../../Source/application/finger_task/finger_task.c"/>
+					<F N="../../Source/application/finger_task/finger_task.h"/>
+				</Folder>
 				<Folder Name="gui_task">
 					<F N="../../Source/application/gui_task/gui_task.c"/>
 					<F N="../../Source/application/gui_task/gui_task.h"/>
@@ -1047,13 +1051,13 @@
 							<F N="../../Source/FML/GUI/GUI_Driver/inc/gui_QR.h"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/inc/gui_record.h"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/inc/gui_rtc.h"/>
-							<F N="../../Source/FML/GUI/GUI_Driver/inc/gui_screen.h"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/inc/gui_sdcard.h"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/inc/gui_slider.h"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/inc/gui_text.h"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/inc/gui_timer.h"/>
 						</Folder>
 						<Folder Name="src">
+							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_base.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_batch.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_button.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_controlproperty.c"/>
@@ -1065,13 +1069,16 @@
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_historygraph.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_icon.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_image.c"/>
+							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_label.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_menu.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_meter.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_music.c"/>
+							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_progress.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_QR.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_record.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_rtc.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_sdcard.c"/>
+							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_selector.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_slider.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_text.c"/>
 							<F N="../../Source/FML/GUI/GUI_Driver/src/gui_timer.c"/>
@@ -1081,6 +1088,8 @@
 					<F N="../../Source/FML/GUI/gui_cmd_queue.h"/>
 					<F N="../../Source/FML/GUI/gui_conf.c"/>
 					<F N="../../Source/FML/GUI/gui_conf.h"/>
+					<F N="../../Source/FML/GUI/gui_fun.c"/>
+					<F N="../../Source/FML/GUI/gui_fun.h"/>
 					<F N="../../Source/FML/GUI/gui_process.c"/>
 					<F N="../../Source/FML/GUI/gui_process.h"/>
 				</Folder>

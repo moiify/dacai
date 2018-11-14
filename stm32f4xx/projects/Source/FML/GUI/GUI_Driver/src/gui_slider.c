@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "gui_slider.h"
 
 /**
@@ -78,7 +78,7 @@
  * @brief         
  * @{  
  */
-
+void (*GUI_SLIDER_CallBack)(uint16_t screen_id, uint16_t control_id, uint32_t value);
 /**
  * @}
  */
@@ -115,21 +115,10 @@ void GUI_Slider_SetValue(uint16_t screen_id,uint16_t control_id,uint32_t value)
     BSP_LCD_SendUint32(value);
     GUI_SendEndCMD();
 }
-/*! 
-*  \brief      设置进度值
-*  \param  screen_id 画面ID
-*  \param  control_id 控件ID
-*  \param  value 数值
-*/
-void GUI_SetProgressValue(uint16_t screen_id,uint16_t control_id,uint32_t value)
+
+void GUI_SetSliderCallback(void (*recv)(uint16_t screen_id, uint16_t control_id, uint32_t value))
 {
-    GUI_SendHeadCMD();
-    BSP_LCD_WriteByte(0xB1);
-    BSP_LCD_WriteByte(0x10);
-    BSP_LCD_SendUint16(screen_id);
-    BSP_LCD_SendUint16(control_id);
-    BSP_LCD_SendUint32(value);
-    GUI_SendEndCMD();
+    GUI_SLIDER_CallBack=recv;
 }
 /**
  * @}

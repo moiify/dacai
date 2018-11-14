@@ -10,10 +10,8 @@
  *
  **************************************************************************************************
  */
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "gui_button.h"
-
-
 /**
  * @addtogroup    XXX 
  * @{  
@@ -79,7 +77,7 @@
  * @brief         
  * @{  
  */
-
+void (*GUI_BUTTON_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t  state);
 /**
  * @}
  */
@@ -99,12 +97,13 @@
  * @brief         
  * @{  
  */
-/*! 
-*  \brief     设置按钮状态
-*  \param  screen_id 画面ID
-*  \param  control_id 控件ID
-*  \param  value 按钮状态
-*/
+
+/**
+ * @brief    设置按钮状态
+ * @param    screen_id:uint16_t 画面ID
+ * @param    control_id:uint16_t 控件ID
+ * @param    state:uint8_t 按钮状态	0表示弹起 1表示按下
+ */
 void GUI_BUTTON_SetState(uint16_t screen_id,uint16_t control_id,uint8_t state)
 {
     GUI_SendHeadCMD();
@@ -114,6 +113,10 @@ void GUI_BUTTON_SetState(uint16_t screen_id,uint16_t control_id,uint8_t state)
     BSP_LCD_SendUint16(control_id);
     BSP_LCD_WriteByte(state);
     GUI_SendEndCMD();
+}
+void GUI_SetButtonCallback(void (*recv)(uint16_t screen_id, uint16_t control_id, uint8_t  state))
+{
+    GUI_BUTTON_CallBack=recv;
 }
 /**
  * @}

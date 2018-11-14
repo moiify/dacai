@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "gui_general.h"
 /**
  * @addtogroup    XXX 
@@ -77,7 +77,9 @@
  * @brief         
  * @{  
  */
-
+void (*GUI_TOUCH_CallBack)(uint8_t press,uint16_t x,uint16_t y);
+void (*GUI_HANDSHAKE_CallBack)();
+void (*GUI_SCREEN_CallBack)(uint16_t screen_id);
 /**
  * @}
  */
@@ -305,6 +307,19 @@ void GUI_SetCommBps(uint8_t option)
     BSP_LCD_WriteByte(0xA0);
     BSP_LCD_WriteByte(option);
     GUI_SendEndCMD();
+}
+
+void GUI_SetTouchCallback(void (*recv)(uint8_t press,uint16_t x,uint16_t y))
+{
+    GUI_TOUCH_CallBack=recv;
+}
+void GUI_SetHandshakeCallback(void (*recv)())
+{
+    GUI_HANDSHAKE_CallBack=recv;
+}
+void GUI_SetScreenCallback(void (*recv)(uint16_t screen_id))
+{
+    GUI_SCREEN_CallBack=recv;
 }
 /**
  * @}

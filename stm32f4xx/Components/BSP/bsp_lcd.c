@@ -12,7 +12,6 @@
  */
 #include "stm32f4xx_bsp_usart.h"
 #include "bsp_lcd.h"
-
 /**
  * @addtogroup    XXX 
  * @{  
@@ -109,49 +108,6 @@ void BSP_LCD_WriteByte(uint8_t c)
     BSP_USART_WriteByte(BSP_USART1,c);
 }
 
-void BSP_LCD_SendStrings(uint8_t *str)
-{
-    while(*str)
-    {
-        BSP_LCD_WriteByte(*str);
-        str++;
-    }
-}
-
-void BSP_LCD_SendUint8(uint8_t value)
-{
-    BSP_LCD_WriteByte(value);
-}
-
-void BSP_LCD_SendUint16(uint16_t value)
-{
-    BSP_LCD_WriteByte(value>>8);
-    BSP_LCD_WriteByte(value&0xff);
-}
-
-void BSP_LCD_SendUint32(uint32_t value)
-{
-    BSP_LCD_SendUint16(value>>16);
-    BSP_LCD_SendUint16(value&0xffff);
-}
-
-void BSP_LCD_SendUint16N(uint16_t *pData,uint16_t count)
-{
-    uint16_t i=0;
-    for (i=0;i<count;++i)
-    {
-        BSP_LCD_SendUint16(pData[i]);
-    }
-}
-
-void BSP_LCD_SendUint8N(uint8_t *pData,uint16_t count)
-{
-    uint16_t i=0;
-    for (i=0;i<count;++i)
-    {
-        BSP_LCD_SendUint8(pData[i]);
-    }
-}
 /**
  * @}
  */

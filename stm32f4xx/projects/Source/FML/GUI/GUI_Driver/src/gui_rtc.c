@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "gui_rtc.h"
 
 /**
@@ -78,7 +78,7 @@
  * @brief         
  * @{  
  */
-
+void (*GUI_RTC_CallBack)(uint8_t year,uint8_t month,uint8_t week,uint8_t day,uint8_t hour,uint8_t minute,uint8_t second);
 /**
  * @}
  */
@@ -121,6 +121,11 @@ void GUI_GUI_DispRTC(uint8_t enable,uint8_t mode,uint8_t font,uint16_t color,uin
     BSP_LCD_SendUint16(x);
     BSP_LCD_SendUint16(y);
     GUI_SendEndCMD();
+}
+
+void GUI_SetRtcCallback(void (*recv)(uint8_t year,uint8_t month,uint8_t week,uint8_t day,uint8_t hour,uint8_t minute,uint8_t second))
+{
+    GUI_RTC_CallBack=recv;
 }
 /**
  * @}

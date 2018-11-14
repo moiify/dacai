@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "gui_menu.h"
 
 /**
@@ -78,7 +78,7 @@
  * @brief         
  * @{  
  */
-
+void (*GUI_MENU_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t item, uint8_t state);
 /**
  * @}
  */
@@ -98,7 +98,10 @@
  * @brief         
  * @{  
  */
-
+void GUI_SetMenuCallback(void (*recv)(uint16_t screen_id, uint16_t control_id, uint8_t item, uint8_t state))
+{
+    GUI_MENU_CallBack=recv;
+}
 /**
  * @}
  */

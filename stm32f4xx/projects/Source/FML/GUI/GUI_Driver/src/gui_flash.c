@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "gui_flash.h"
 /**
  * @addtogroup    XXX 
@@ -77,7 +77,8 @@
  * @brief         
  * @{  
  */
-
+void (*GUI_FLASHW_CallBack)(uint8_t status);
+void (*GUI_FLASHR_CallBack)(uint8_t status,uint8_t *data,uint16_t length);
 /**
  * @}
  */
@@ -171,6 +172,15 @@ void GUI_ReadUserFlash(uint32_t startAddress,uint16_t length)
     BSP_LCD_SendUint32(startAddress);
     BSP_LCD_SendUint16(length);
     GUI_SendEndCMD();
+}
+
+void GUI_SetFlashWCallback(void (*recv)(uint8_t status))
+{
+    GUI_FLASHW_CallBack=recv;
+}
+void GUI_SetFlashRCallback(void (*recv)(uint8_t status,uint8_t *data,uint16_t length))
+{
+    GUI_FLASHR_CallBack=recv;
 }
 /**
  * @}

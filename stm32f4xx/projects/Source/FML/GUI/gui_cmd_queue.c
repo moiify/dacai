@@ -12,7 +12,7 @@
  */
 #include "self_def.h"
 #include "gui_cmd_queue.h"
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "crc.h"
 /**
  * @addtogroup    XXX 

@@ -54,7 +54,7 @@
  * @defgroup      gui_meter_Exported_Variables 
  * @{  
  */
-
+extern void (*GUI_METER_CallBack)(uint16_t screen_id,uint16_t control_id,uint32_t value);
 /**
  * @}
  */
@@ -64,6 +64,7 @@
  * @{  
  */
 void GUI_Meter_Value(uint16_t screen_id,uint16_t control_id,uint32_t value);
+void GUI_SetMeterCallback(void (*recv)(uint16_t screen_id,uint16_t control_id,uint32_t value));
 /**
  * @}
  */

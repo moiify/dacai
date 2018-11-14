@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "gui_meter.h"
 
 /**
@@ -78,7 +78,7 @@
  * @brief         
  * @{  
  */
-
+void (*GUI_METER_CallBack)(uint16_t screen_id,uint16_t control_id,uint32_t value);
 /**
  * @}
  */
@@ -113,6 +113,10 @@ void GUI_Meter_Value(uint16_t screen_id,uint16_t control_id,uint32_t value)
     BSP_LCD_SendUint16(control_id);
     BSP_LCD_SendUint32(value);
     GUI_SendEndCMD();
+}
+void GUI_SetMeterCallback(void (*recv)(uint16_t screen_id,uint16_t control_id,uint32_t value))
+{
+    GUI_METER_CallBack=recv;
 }
 /**
  * @}

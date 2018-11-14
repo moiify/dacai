@@ -54,7 +54,7 @@
  * @defgroup      gui_timer_Exported_Variables 
  * @{  
  */
-
+extern void (*GUI_TIMER_CallBack)(uint16_t screen_id, uint16_t control_id);
 /**
  * @}
  */
@@ -67,6 +67,7 @@ void GUI_Timer_Set(uint16_t screen_id,uint16_t control_id,uint32_t timeout);
 void GUI_Timer_Start(uint16_t screen_id,uint16_t control_id);
 void GUI_Timer_Stop(uint16_t screen_id,uint16_t control_id);
 void GUI_Timer_Pause(uint16_t screen_id,uint16_t control_id);
+void GUI_SetTimerCallback(void (*recv)(uint16_t screen_id, uint16_t control_id));
 /**
  * @}
  */

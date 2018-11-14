@@ -10,7 +10,7 @@
  *
  **************************************************************************************************
  */
-#include "gui_conf.h"
+#include "gui_base.h"
 #include "gui_timer.h"
 
 /**
@@ -78,7 +78,7 @@
  * @brief         
  * @{  
  */
-
+void (*GUI_TIMER_CallBack)(uint16_t screen_id, uint16_t control_id);
 /**
  * @}
  */
@@ -155,6 +155,11 @@ void GUI_Timer_Pause(uint16_t screen_id,uint16_t control_id)
     BSP_LCD_SendUint16(screen_id);
     BSP_LCD_SendUint16(control_id);
     GUI_SendEndCMD();
+}
+
+void GUI_SetTimerCallback(void (*recv)(uint16_t screen_id, uint16_t control_id))
+{
+    GUI_TIMER_CallBack=recv;
 }
 /**
  * @}

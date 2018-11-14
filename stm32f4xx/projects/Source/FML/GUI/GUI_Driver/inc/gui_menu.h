@@ -54,7 +54,7 @@
  * @defgroup      gui_menu_Exported_Variables 
  * @{  
  */
-
+extern void (*GUI_MENU_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t item, uint8_t state);
 /**
  * @}
  */
@@ -63,7 +63,7 @@
  * @defgroup      gui_menu_Exported_Functions 
  * @{  
  */
-
+void GUI_SetMenuCallback(void (*recv)(uint16_t screen_id, uint16_t control_id, uint8_t item, uint8_t state));
 /**
  * @}
  */
