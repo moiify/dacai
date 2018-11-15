@@ -78,7 +78,7 @@
  * @brief         
  * @{  
  */
-void (*GUI_TEXT_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t *str);
+void (*GUI_TEXT_StringUpdate_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t *str);
 /**
  * @}
  */
@@ -178,7 +178,7 @@ void GUI_TEXT_SetFloat(uint16_t screen_id,uint16_t control_id,float value,uint8_
 
 void GUI_SetTextCallback(void (*recv)(uint16_t screen_id, uint16_t control_id, uint8_t *str))
 {
-    GUI_TEXT_CallBack=recv;
+    GUI_TEXT_StringUpdate_CallBack=recv;
 }
 /**
  * @}

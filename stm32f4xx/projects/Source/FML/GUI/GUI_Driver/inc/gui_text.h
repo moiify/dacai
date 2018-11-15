@@ -54,7 +54,7 @@
  * @defgroup      gui_text_Exported_Variables 
  * @{  
  */
-extern void (*GUI_TEXT_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t *str);
+extern void (*GUI_TEXT_StringUpdate_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t *str);
 /**
  * @}
  */

@@ -54,7 +54,7 @@
  * @defgroup      gui_button_Exported_Variables 
  * @{  
  */
-extern void (*GUI_BUTTON_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t  state);
+extern void (*GUI_BUTTON_State_CallBack)(uint16_t screen_id, uint16_t control_id, uint8_t  state);
 /**
  * @}
  */

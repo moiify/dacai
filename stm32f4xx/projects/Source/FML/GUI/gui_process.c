@@ -136,57 +136,129 @@ static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
     {  
         case NOTIFY_TOUCH_PRESS:                                                        //触摸屏按下
         case NOTIFY_TOUCH_RELEASE:                                                      //触摸屏松开
-        GUI_TOUCH_CallBack(cmd_buffer[1],BIG2LITTLESWAP16(cmd_buffer[2]),BIG2LITTLESWAP16(cmd_buffer[4])); 
-        break;                                                                    
+        {
+            if(GUI_TOUCH_CallBack!=NULL)
+            {
+                GUI_TOUCH_CallBack(cmd_buffer[1],BIG2LITTLESWAP16(cmd_buffer[2]),BIG2LITTLESWAP16(cmd_buffer[4])); 
+            }
+            break;
+        }
         case NOTIFY_WRITE_FLASH_OK:                                                     //写FLASH成功
-        GUI_FLASHW_CallBack(1);                                                      
-        break;                                                                    
+        {
+            if(GUI_FLASHW_CallBack!=NULL)
+            {
+                GUI_FLASHW_CallBack(1); 
+            }
+            break;
+        }
         case NOTIFY_WRITE_FLASH_FAILD:                                                  //写FLASH失败
-        GUI_FLASHW_CallBack(0);                                                      
-        break;                                                                    
+        {
+            if(GUI_FLASHW_CallBack!=NULL)
+            {
+                GUI_FLASHW_CallBack(0);  
+            }
+            break;             
+        }
         case NOTIFY_READ_FLASH_OK:                                                      //读取FLASH成功
-        GUI_FLASHR_CallBack(1,cmd_buffer+2,size-6);                              	    //去除帧头帧尾
-        break;                                                                    
-        case NOTIFY_READ_FLASH_FAILD:                                                   //读取FLASH失败
-        GUI_FLASHR_CallBack(0,0,0);                                                   
-        break;                                                                    
+        {
+            if(GUI_FLASHR_CallBack!=NULL)
+            {
+                GUI_FLASHR_CallBack(1,cmd_buffer+2,size-6);                              	    //去除帧头帧尾
+            }
+            break;                                                                    
+        }
+        case NOTIFY_READ_FLASH_FAILD:          
+        {
+            //读取FLASH失败
+            if(GUI_FLASHR_CallBack!=NULL)
+            {
+                GUI_FLASHR_CallBack(0,0,0);      
+            }
+            break;
+        }
         case NOTIFY_READ_RTC:                                                           //读取RTC时间
-        GUI_RTC_CallBack(cmd_buffer[2],cmd_buffer[3],cmd_buffer[4],cmd_buffer[5],cmd_buffer[6],cmd_buffer[7],cmd_buffer[8]);
+        if(GUI_RTC_CallBack!=NULL)
+        {
+            GUI_RTC_CallBack(cmd_buffer[2],cmd_buffer[3],cmd_buffer[4],cmd_buffer[5],cmd_buffer[6],cmd_buffer[7],cmd_buffer[8]);
+        }
         break;
         case NOTIFY_CONTROL:															//控件更新通知															//控件更新通知
         {
             if(ctrl_msg==MSG_GET_CURRENT_SCREEN)                                   		 //画面ID变化通知
-            {
-                GUI_SCREEN_CallBack(screen_id);                                            //画面切换调动的函数
+            {   
+                if(GUI_SCREEN_CallBack!=NULL)     
+                {
+                    GUI_SCREEN_CallBack(screen_id);                                            //画面切换调动的函数
+                }
             }
             else
             {
                 switch(control_type)
                 {
                     case kCtrlButton:                                                   //按钮控件
-                    GUI_BUTTON_CallBack(screen_id,control_id,msg->param[1]);
-                    break;                                                             
+                    {
+                        if(GUI_BUTTON_State_CallBack!=NULL)
+                        {
+                            GUI_BUTTON_State_CallBack(screen_id,control_id,msg->param[1]);
+                        }
+                        break;                     
+                    }
                     case kCtrlText:                                                     //文本控件
-                    GUI_TEXT_CallBack(screen_id,control_id,msg->param);                       
-                    break;              
+                    {
+                        if(GUI_TEXT_StringUpdate_CallBack!=NULL)
+                        {
+                            GUI_TEXT_StringUpdate_CallBack(screen_id,control_id,msg->param);                       
+                        }
+                        break;              
+                    }
                     case kCtrlProgress:                                                 //进度条控件
-                    GUI_PROGRESS_CallBack(screen_id,control_id,value);                        
-                    break;                                                             
+                    {
+                        if(GUI_PROGRESS_CallBack!=NULL)
+                        {
+                            GUI_PROGRESS_CallBack(screen_id,control_id,value);                        
+                        }
+                        break;                                                             
+                    }
                     case kCtrlSlider:                                                   //滑动条控件
-                    GUI_SLIDER_CallBack(screen_id,control_id,value);                          
-                    break;                                                             
+                    {
+                        if(GUI_SLIDER_CallBack!=NULL)
+                        {
+                            GUI_SLIDER_CallBack(screen_id,control_id,value);                          
+                            break;                                                             
+                        }
+                    }
                     case kCtrlMeter:                                                    //仪表控件
-                    GUI_METER_CallBack(screen_id,control_id,value);                           
-                    break;                                                             
+                    {
+                        if(GUI_METER_CallBack!=NULL)
+                        {
+                            GUI_METER_CallBack(screen_id,control_id,value);                           
+                            break;                           
+                        }
+                    }
                     case kCtrlMenu:                                                     //菜单控件
-                    GUI_MENU_CallBack(screen_id,control_id,msg->param[0],msg->param[1]);      
-                    break;                                                              
+                    {
+                        if(GUI_MENU_CallBack!=NULL)
+                        {
+                            GUI_MENU_CallBack(screen_id,control_id,msg->param[0],msg->param[1]);      
+                            break;                                                              
+                        }
+                    }
                     case kCtrlSelector:                                                 //选择控件
-                    GUI_SELECTOR_CallBack(screen_id,control_id,msg->param[0]);                
-                    break;                                                              
-                    case kCtrlTimer:                                                     //倒计时控件
-                    GUI_TIMER_CallBack(screen_id,control_id);
-                    break;
+                    {
+                        if(GUI_SELECTOR_CallBack!=NULL)
+                        {
+                            GUI_SELECTOR_CallBack(screen_id,control_id,msg->param[0]);                
+                            break;                                                              
+                        }
+                    }
+                    case kCtrlTimer:                                                    //倒计时控件
+                    {
+                        if(GUI_TIMER_CallBack!=NULL)
+                        {
+                            GUI_TIMER_CallBack(screen_id,control_id);
+                            break;
+                        }
+                    }
                     default:
                     break;
                 }
@@ -198,6 +270,7 @@ static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
         break;
         default:
         break;
+        
     }
 }
 

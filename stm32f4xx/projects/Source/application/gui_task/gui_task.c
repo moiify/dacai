@@ -16,8 +16,9 @@
 #include "osal.h"
 #include "clog.h"
 #include "cshell.h"
-#include "gui_task.h"
+#include "gui_fun.h"
 #include "gui_process.h"
+#include "gui_task.h"
 /**
  * @addtogroup    XXX 
  * @{  
@@ -107,6 +108,7 @@ void GuiTask_Init(uint8_t taskId)
 {
     g_GuiTask_Id = taskId;
   //  OS_Timer_Start(g_GuiTask_Id, GUI_TASK_KEY_PROCESS_EVENT,300);
+    GUI_CON_SetCallBack();
     OS_Timer_Start(g_GuiTask_Id, GUI_TASK_LOOP_EVENT,350);
 }
 

@@ -163,9 +163,23 @@ void GUI_Record_Add(uint16_t screen_id,uint16_t control_id,uint8_t *record)
     BSP_LCD_WriteByte(0x52);
     BSP_LCD_SendUint16(screen_id);
     BSP_LCD_SendUint16(control_id);
-
     BSP_LCD_SendStrings(record);
 
+    GUI_SendEndCMD();
+}
+/*! 
+*  \brief     记录控件-删除某条常规记录
+*  \param  screen_id 画面ID
+*  \param  control_id 控件ID
+*/
+void GUI_Record_Delete(uint16_t screen_id,uint16_t control_id,uint16_t position_id)
+{
+    GUI_SendHeadCMD();
+    BSP_LCD_WriteByte(0xB1);
+    BSP_LCD_WriteByte(0x58);
+    BSP_LCD_SendUint16(screen_id);
+    BSP_LCD_SendUint16(control_id);
+    BSP_LCD_SendUint16(position_id);    
     GUI_SendEndCMD();
 }
 /*! 

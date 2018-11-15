@@ -16,6 +16,7 @@
 #include "osal_core.h"
 #include "user_task.h"
 #include "gui_task.h"
+#include "finger_task.h"
 #include "osal_task.h"
 /**
  * @addtogroup    XXX 

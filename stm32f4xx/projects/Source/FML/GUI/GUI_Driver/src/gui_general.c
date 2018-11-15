@@ -313,7 +313,7 @@ void GUI_SetTouchCallback(void (*recv)(uint8_t press,uint16_t x,uint16_t y))
 {
     GUI_TOUCH_CallBack=recv;
 }
-void GUI_SetHandshakeCallback(void (*recv)())
+void GUI_SetHandShakeCallback(void (*recv)())
 {
     GUI_HANDSHAKE_CallBack=recv;
 }
