@@ -106,11 +106,9 @@ static void gui_Message_Process( GUI_Dacai_Proto_t * msg, uint16_t size );
 
 void Gui_CheckCMD_Loop_Process()
 {   
-    uint16_t size=0;
-    
-    size = GUI_Queue_Find_Cmd(cmd_buffer,CMD_MAX_SIZE);                          //从缓冲区中获取一条指令         
-    
-    if(size>0)                                              					 //接收到指令
+    uint16_t size=0;  
+    Gui_CMD_Queue_Push();
+    if(Gui_CMD_Queue_Pop(cmd_buffer))                                              					 //接收到指令
     {                                                                           
         gui_Message_Process((GUI_Dacai_Proto_t *)cmd_buffer, size);              //指令处理
     }                                                                           
@@ -163,7 +161,7 @@ static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
         {
             if(GUI_FLASHR_CallBack!=NULL)
             {
-                GUI_FLASHR_CallBack(1,cmd_buffer+2,size-6);                              	    //去除帧头帧尾
+                GUI_FLASHR_CallBack(1,cmd_buffer+2,size-6);                             //去除帧头帧尾
             }
             break;                                                                    
         }

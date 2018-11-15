@@ -28,7 +28,7 @@
  * @defgroup      gui_cmd_queue_Exported_Macros 
  * @{  
  */
-
+#define GUI_CMD_LEN_MAX  100
 /**
  * @}
  */
@@ -64,9 +64,9 @@
  * @defgroup      gui_cmd_queue_Exported_Functions 
  * @{  
  */
-void GUI_Queue_Reset(void);
-void GUI_Queue_Push(uint8_t data);
-uint16_t GUI_Queue_Find_Cmd(uint8_t *cmd,uint16_t buf_len);
+
+uint8_t  Gui_CMD_Queue_Pop(uint8_t *dst);
+void     Gui_CMD_Queue_Push(void);
 /**
  * @}
  */

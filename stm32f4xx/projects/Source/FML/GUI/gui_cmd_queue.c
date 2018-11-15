@@ -11,6 +11,7 @@
  **************************************************************************************************
  */
 #include "self_def.h"
+#include "stm32_bsp_conf.h"
 #include "gui_cmd_queue.h"
 #include "gui_base.h"
 #include "crc.h"
@@ -49,9 +50,8 @@
  * @brief         
  * @{  
  */
-#define CMD_HEAD 0XEE                                                  //帧头
-#define CMD_TAIL 0XFFFCFFFF                                            //帧尾
-#define QUEUE_MAX_SIZE              512
+#define DACAI_CMD_HEAD 0XEE                                                  //帧头
+#define DACAI_CMD_END 0XFFFCFFFF                                             //帧尾
 /**
  * @}
  */
@@ -60,13 +60,25 @@
  * @defgroup      gui_cmd_queue_Private_Types
  * @brief         
  * @{  
- */
-typedef struct                                            
-{                                                                 
-    uint16_t head;                                                       //队列头
-    uint16_t tail;                                                       //队列尾
-    uint8_t data[QUEUE_MAX_SIZE];                                       //队列数据缓存区
-}gui_queue_t;                                                           
+ */ 
+typedef struct
+{
+	uint8_t readbuf[BSP_USART1_RXBUF_SIZE];
+	uint16_t index;
+}cmd_decode_cache_t;
+typedef struct
+{
+	uint8_t buf[GUI_CMD_LEN_MAX];
+    uint16_t len;
+}cmd_chache_t;
+typedef struct
+{
+	cmd_chache_t Buf[5];
+	uint8_t In;
+	uint8_t Out;
+	uint8_t Count;
+	uint8_t Size;
+}cmd_queue_cache_t;
 /**
  * @}
  */
@@ -76,9 +88,18 @@ typedef struct
  * @brief         
  * @{  
  */
-static gui_queue_t gui_queue= {0,0,0};                                   //指令队列
-static uint32_t s_cmd_state = 0;                                           //队列帧尾检测状态
-static uint16_t s_cmd_pos = 0;                                              //当前指令指针位置
+static cmd_decode_cache_t s_cmd_cache =
+{
+	.index = 0,
+	.readbuf = { 0 },
+};
+static cmd_queue_cache_t s_cmd_queue =
+{
+	.Count = 0,
+	.In = 0,
+	.Out = 0,
+	.Size = sizeof(s_cmd_queue.Buf) / sizeof(s_cmd_queue.Buf[0]),
+};
 /**
  * @}
  */
@@ -98,9 +119,7 @@ static uint16_t s_cmd_pos = 0;                                              //当
  * @brief         
  * @{  
  */
-static void gui_queue_pop(uint8_t* data);
-static uint16_t gui_queue_get_size();
-
+static uint16_t gui_cmd_queue_decode();
 /**
  * @}
  */
@@ -110,87 +129,106 @@ static uint16_t gui_queue_get_size();
  * @brief         
  * @{  
  */
-/*! 
-*  \brief  清空指令数据
-*/
-void GUI_Queue_Reset()
+/**
+ * @brief    从串口缓存解析数据，并传入消息队列
+ */
+
+void Gui_CMD_Queue_Push()
 {
-    gui_queue.head = gui_queue.tail = 0;
-    s_cmd_pos =s_cmd_state = 0;
+	uint16_t readcount = 0;
+	uint16_t idlecount = 0;
+	idlecount = sizeof(s_cmd_cache.readbuf) - s_cmd_cache.index;
+	if (idlecount > 0)
+	{
+		readcount = BSP_USART_ReadBytes(BSP_USART1, &s_cmd_cache.readbuf[s_cmd_cache.index], idlecount);
+		if (readcount > 0)
+		{
+			s_cmd_cache.index += readcount;
+			s_cmd_cache.index -= gui_cmd_queue_decode();
+		}
+	}
 }
-/*! 
-* \brief  添加指令数据
-* \detial 串口接收的数据，通过此函数放入指令队列 
-*  \param  _data 指令数据
-*/
-void GUI_Queue_Push(uint8_t data)
+
+/**
+ * @brief    从队列里取一条消息
+ * @param    dst:uint8_t* 目的地数组
+ * @retval   uint8_t: 0无消息  1取成功
+ */
+
+uint8_t Gui_CMD_Queue_Pop(uint8_t *dst)
 {
-    uint16_t pos = (gui_queue.head+1)%QUEUE_MAX_SIZE;
-    if(pos!=gui_queue.tail)                                                //非满状态
+    if(s_cmd_queue.Count>0)
+    {   
+        memcpy(dst,s_cmd_queue.Buf[s_cmd_queue.Out].buf,s_cmd_queue.Buf[s_cmd_queue.Out].len);
+        memset(s_cmd_queue.Buf[s_cmd_queue.Out].buf,0,s_cmd_queue.Buf[s_cmd_queue.Out].len); //用完后将内存清空，不然下一次短数据受影响
+        s_cmd_queue.Out++;
+        s_cmd_queue.Out %= s_cmd_queue.Size;
+        s_cmd_queue.Count--;
+        return 1;
+    }
+    else 
     {
-        gui_queue.data[gui_queue.head] = data;
-        gui_queue.head = pos;
+        return 0;
     }
 }
+/**
+ * @brief    解数据流中的协议包
+ * @retval   uint16_t: 解掉的字节数
+ */
 
-//从队列中取一个数据
-static void gui_queue_pop(uint8_t* data)
+static uint16_t gui_cmd_queue_decode()
 {
-    if(gui_queue.tail!=gui_queue.head)                                          //非空状态
+	uint16_t offset = 0;
+	uint16_t cmd_head_index=0;
+	uint16_t decode_count = 0;
+	uint16_t remain_count = s_cmd_cache.index;
+	uint8_t *pBuf = s_cmd_cache.readbuf;
+	uint32_t check_end=0;
+
+	while (remain_count > sizeof(DACAI_CMD_HEAD) + sizeof(DACAI_CMD_END)&&s_cmd_queue.Count<s_cmd_queue.Size)
+	{
+		if (pBuf[offset]== DACAI_CMD_HEAD)
+		{	
+			cmd_head_index=offset;
+			while (remain_count>sizeof(DACAI_CMD_END))
+			{	
+				check_end=(uint32_t)pBuf[offset+1]<<24|(uint32_t)pBuf[offset+2]<<16|(uint32_t)pBuf[offset+3]<<8|(uint32_t)pBuf[offset+4];
+				if (check_end == DACAI_CMD_END)  //收到一条指令
+				{   
+                    s_cmd_queue.Buf[s_cmd_queue.In].len=(offset-cmd_head_index+5);
+					memcpy(s_cmd_queue.Buf[s_cmd_queue.In].buf,&pBuf[cmd_head_index],s_cmd_queue.Buf[s_cmd_queue.In].len);
+					s_cmd_queue.In++;
+					s_cmd_queue.Count++;
+					s_cmd_queue.In %= s_cmd_queue.Size;
+					offset +=5;
+					decode_count +=5;
+					remain_count -=5;
+                    break;                       //此break用来继续检测缓存中是存在下一条命令
+				}
+				else 
+				{
+					offset++;
+					decode_count++;
+					remain_count--;
+				}
+			}
+
+		}
+		else
+		{
+			offset++;
+			decode_count++;
+			remain_count--;
+		}
+	}
+    if (offset != 0)
     {
-        *data = gui_queue.data[gui_queue.tail];
-        gui_queue.tail = (gui_queue.tail+1)%QUEUE_MAX_SIZE;
-    }
-}
-
-//获取队列中有效数据个数
-static uint16_t gui_queue_get_size()
-{
-    return ((gui_queue.head+QUEUE_MAX_SIZE-gui_queue.tail)%QUEUE_MAX_SIZE);
-}
-/*! 
-*  \brief  从指令队列中取出一条完整的指令
-*  \param  cmd 指令接收缓存区
-*  \param  buf_len 指令接收缓存区大小
-*  \return  指令长度，0表示队列中无完整指令
-*/
-uint16_t GUI_Queue_Find_Cmd(uint8_t *buffer,uint16_t buf_len)
-{
-    uint16_t cmd_size = 0;
-    uint8_t data = 0;
-
-    while(gui_queue_get_size()>0)
-    {
-        //取一个数据
-        gui_queue_pop(&data);
-
-        if(s_cmd_pos==0&&data!=CMD_HEAD)                               //指令第一个字节必须是帧头，否则跳过adfasdfas
+        for (int i=0; i < remain_count; i++)
         {
-            continue;
-        }
-        if(s_cmd_pos<buf_len)                                           //防止缓冲区溢出
-            buffer[s_cmd_pos++] = data;
-
-        s_cmd_state = ((s_cmd_state<<8)|data);                           //拼接最后4个字节，组成一个32位整数
-
-        //最后4个字节与帧尾匹配，得到完整帧
-        if(s_cmd_state==CMD_TAIL)
-        {
-            cmd_size = s_cmd_pos;                                       //指令字节长度
-            s_cmd_state = 0;                                            //重新检测帧尾巴
-            s_cmd_pos = 0;                                              //复位指令指针
-
-#if(CRC16_ENABLE)
-            //去掉指令头尾EE，尾FFFCFFFF共计5个字节，只计算数据部分CRC
-            if(!CRC16_Modbus(buffer+1,s_cmd_size-5))                      //CRC校验
-                return 0;
-
-            cmd_size -= 2;                                            //去掉CRC16（2字节）
-#endif
-            return cmd_size;
+            pBuf[i] = pBuf[offset+i];
         }
     }
-    return 0;                                                         //没有形成完整的一帧
+    return decode_count;
 }
 /**
  * @}
