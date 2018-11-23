@@ -13,6 +13,7 @@
 #ifndef _STM32_BSP_CONF_H_
 #define _STM32_BSP_CONF_H_
 #include "stdint.h"
+#include "self_def.h"
 /**
  * @addtogroup    XXX 
  * @{ 

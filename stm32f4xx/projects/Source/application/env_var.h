@@ -31,8 +31,8 @@
 #define COM_USART_MAINTAIN  BSP_USART2
 
      
-#define FLASH_PARAM_START_ADDR      (0xF800)
-#define FLASH_PARAM_BACK_START_ADDR (0xFC00)
+#define FLASH_PARAM_START_ADDR      (0x1E0800)  
+#define FLASH_PARAM_BACK_START_ADDR (0x1E0000)    //F429µÚ23Çø¿é
 /**
  * @}
  */

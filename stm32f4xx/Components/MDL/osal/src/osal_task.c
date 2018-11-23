@@ -66,8 +66,8 @@
 const pTaskEventHandlerFn g_TasksFnArr[OSAL_TASK_COUNT] =
 {
     UserTask_Process,
+    FingerTask_Process,
     GuiTask_Process,
-	FingerTask_Process,
 };
 
 uint32_t g_TasksEvents[OSAL_TASK_COUNT];
@@ -114,8 +114,8 @@ void OS_Task_Init(void)
 {
     uint8_t task_id = 0;
     UserTask_Init(task_id++);
+    FingerTask_Init(task_id++);
     GuiTask_Init(task_id++);
-	FingerTask_Init(task_id++);
 }   
 
 /**

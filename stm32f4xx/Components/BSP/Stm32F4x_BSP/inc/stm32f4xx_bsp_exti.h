@@ -27,7 +27,7 @@
  * @defgroup      stm32f4xx_bsp_exti_Exported_Macros 
  * @{  
  */
-
+#define BSP_EXTI0   0
 /**
  * @}
  */
@@ -63,7 +63,8 @@
  * @defgroup      stm32f4xx_bsp_exti_Exported_Functions 
  * @{  
  */
-
+void BSP_EXTI_Open(uint8_t BSP_EXTIx);
+void BSP_EXTI_IRQHandler(uint8_t BSP_EXTIx);
 /**
  * @}
  */

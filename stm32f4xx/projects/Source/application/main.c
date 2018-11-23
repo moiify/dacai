@@ -102,15 +102,16 @@
  * @{  
  */
 int main()
-{
-    Board_Init();
-     
+{   
+
+    Board_Init();  
+    
     BSP_SYSTICK_Open();
     
     __enable_irq();
     
     System_Load();
-    
+
     OS_Init();
     
     OS_Start();

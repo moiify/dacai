@@ -1,6 +1,6 @@
 /**
  **************************************************************************************************
- * @file        stm32f0xx_bsp_flash.c
+ * @file        stm32f4xx_bsp_flash.c
  * @author
  * @version   v0.1.0
  * @date        
@@ -19,12 +19,12 @@
  */
 
 /**
- * @addtogroup    stm32f0xx_bsp_flash_Modules 
+ * @addtogroup    stm32f4xx_bsp_flash_Modules 
  * @{  
  */
 
 /**
- * @defgroup      stm32f0xx_bsp_flash_IO_Defines 
+ * @defgroup      stm32f4xx_bsp_flash_IO_Defines 
  * @brief         
  * @{  
  */
@@ -34,17 +34,7 @@
  */
 
 /**
- * @defgroup      stm32f0xx_bsp_flash_Macros_Defines 
- * @brief         
- * @{  
- */
-#define FLASH_START_ADDR    0x8000000
-/**
- * @}
- */
-
-/**
- * @defgroup      stm32f0xx_bsp_flash_Constants_Defines 
+ * @defgroup      stm32f4xx_bsp_flash_Macros_Defines 
  * @brief         
  * @{  
  */
@@ -54,7 +44,7 @@
  */
 
 /**
- * @defgroup      stm32f0xx_bsp_flash_Private_Types
+ * @defgroup      stm32f4xx_bsp_flash_Constants_Defines 
  * @brief         
  * @{  
  */
@@ -64,7 +54,7 @@
  */
 
 /**
- * @defgroup      stm32f0xx_bsp_flash_Private_Variables 
+ * @defgroup      stm32f4xx_bsp_flash_Private_Types
  * @brief         
  * @{  
  */
@@ -74,7 +64,7 @@
  */
 
 /**
- * @defgroup      stm32f0xx_bsp_flash_Public_Variables 
+ * @defgroup      stm32f4xx_bsp_flash_Private_Variables 
  * @brief         
  * @{  
  */
@@ -84,7 +74,7 @@
  */
 
 /**
- * @defgroup      stm32f0xx_bsp_flash_Private_FunctionPrototypes 
+ * @defgroup      stm32f4xx_bsp_flash_Public_Variables 
  * @brief         
  * @{  
  */
@@ -94,14 +84,24 @@
  */
 
 /**
- * @defgroup      stm32f0xx_bsp_flash_Functions 
+ * @defgroup      stm32f4xx_bsp_flash_Private_FunctionPrototypes 
  * @brief         
  * @{  
  */
-void BSP_FLASH_EraseSector(uint32_t addr)
+
+/**
+ * @}
+ */
+
+/**
+ * @defgroup      stm32f4xx_bsp_flash_Functions 
+ * @brief         
+ * @{  
+ */
+void BSP_FLASH_EraseSector(uint16_t FLASH_Sector_x)
 {
     FLASH_Unlock();
-    FLASH_ErasePage(addr+FLASH_START_ADDR);
+    FLASH_EraseSector(FLASH_Sector_x,VoltageRange_3);
     FLASH_Lock();
 }
 
@@ -112,7 +112,7 @@ void BSP_FLASH_WriteBytes(uint32_t addr,uint8_t *pBuf,uint16_t count)
     uint16_t loop = (count+1)/2;
     addr += FLASH_START_ADDR;
     FLASH_Unlock();
-    FLASH_ClearFlag(FLASH_FLAG_BSY|FLASH_FLAG_EOP|FLASH_FLAG_PGERR);
+    FLASH_ClearFlag(FLASH_FLAG_BSY|FLASH_FLAG_EOP|FLASH_FLAG_PGPERR);
     while (loop--)
     {
         data = *(uint16_t*)pBuf;

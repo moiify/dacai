@@ -148,10 +148,6 @@ void SysTick_Handler(void)
     OS_Timer_Update(1);
     OS_Clock_Update(1);
 }
-void USART1_IRQHandler(void)
-{
-    BSP_USART_IRQHandler(BSP_USART1);
-}
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
@@ -167,7 +163,18 @@ void USART1_IRQHandler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
-
+void USART1_IRQHandler(void)
+{
+    BSP_USART_IRQHandler(BSP_USART1);
+}
+void USART2_IRQHandler(void)
+{
+    BSP_USART_IRQHandler(BSP_USART2);
+}
+void EXTI0_IRQHandler(void)
+{   
+    BSP_EXTI_IRQHandler(BSP_EXTI0);
+}
 /**
   * @}
   */ 

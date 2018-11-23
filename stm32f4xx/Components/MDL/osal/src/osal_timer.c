@@ -175,7 +175,7 @@ OSTimer_t *osalTimerFind(uint8_t taskid,osal_event_t event_flag)
 
 OSTimer_t *osalTimerAdd(uint8_t taskid,osal_event_t event_flag,uint32_t timeout)
 {
-    OSTimer_t *new_timer;
+    OSTimer_t *new_timer ;
     OSTimer_t *srch_timer;
     
     new_timer = osalTimerFind(taskid,event_flag);
@@ -232,7 +232,7 @@ uint8_t OS_Timer_Start(uint8_t taskid,osal_event_t event_flag,uint32_t timeout)
 
     // Add timer
     newTimer = osalTimerAdd( taskid, event_flag, timeout );
-    while(!newTimer);
+    //while(!newTimer);
     
     return ( (newTimer != NULL) ? 1 : 0 );
 }

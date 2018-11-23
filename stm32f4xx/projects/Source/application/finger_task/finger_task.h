@@ -27,11 +27,11 @@
  * @defgroup      finger_task_Exported_Macros 
  * @{  
  */
-#define FINGER_TASK_KEY_PROCESS_EVENT     0x0001
-#define FINGER_TASK_LOOP_EVENT            0x0002
-#define FINGER_TASK_SHELL_EVENT           0x0004
-#define FINGER_TASK_OPEN_CMD_EVENT        0x0008
-#define FINGER_TASK_CLOSE_CMD_EVENT       0x0010
+#define FINGER_TASK_ADD_EVENT     		  0x0001
+#define FINGER_TASK_ACK_EVENT             0x0002
+#define FINGER_TASK_SWIP_EVENT            0x0004
+#define FINGER_TASK_INIT_EVENT            0x0008
+#define FINGER_TASK_DELETE_EVENT          0x0010
 /**
  * @}
  */
@@ -58,7 +58,7 @@
  * @defgroup      finger_task_Exported_Variables 
  * @{  
  */
-
+extern uint8_t g_FingerTask_Id;
 /**
  * @}
  */

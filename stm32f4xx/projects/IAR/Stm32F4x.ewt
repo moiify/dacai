@@ -2097,9 +2097,6 @@
   <group>
     <name>Application</name>
     <group>
-      <name>config_task</name>
-    </group>
-    <group>
       <name>finger_task</name>
       <file>
         <name>$PROJ_DIR$\..\Source\application\finger_task\finger_task.c</name>
@@ -2110,9 +2107,6 @@
       <file>
         <name>$PROJ_DIR$\..\Source\application\gui_task\gui_task.c</name>
       </file>
-    </group>
-    <group>
-      <name>modbus_task</name>
     </group>
     <group>
       <name>user_task</name>
@@ -2137,7 +2131,13 @@
       <group>
         <name>src</name>
         <file>
+          <name>$PROJ_DIR$\..\..\Components\BSP\Stm32F4x_BSP\src\stm32f4xx_bsp_dma.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\Components\BSP\Stm32F4x_BSP\src\stm32f4xx_bsp_exti.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\Components\BSP\Stm32F4x_BSP\src\stm32f4xx_bsp_flash.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\Components\BSP\Stm32F4x_BSP\src\stm32f4xx_bsp_systick.c</name>
@@ -2147,6 +2147,9 @@
         </file>
       </group>
     </group>
+    <file>
+      <name>$PROJ_DIR$\..\..\Components\BSP\bsp_as608.c</name>
+    </file>
     <file>
       <name>$PROJ_DIR$\..\..\Components\BSP\bsp_init.c</name>
     </file>
@@ -2298,9 +2301,96 @@
   <group>
     <name>fml</name>
     <group>
-      <name>GUI</name>
+      <name>fingerprint</name>
+      <file>
+        <name>$PROJ_DIR$\..\Source\FML\FingerPrint\fingerprint_function.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Source\FML\FingerPrint\fingerprint_process.c</name>
+      </file>
+    </group>
+    <group>
+      <name>gui</name>
       <group>
-        <name>ports</name>
+        <name>GuiDriver</name>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_base.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_batch.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_button.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_controlproperty.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_curve.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_flash.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_general.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_gif.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_graphics.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_historygraph.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_icon.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_image.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_label.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_menu.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_meter.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_music.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_progress.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_QR.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_record.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_rtc.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_sdcard.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_selector.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_slider.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_text.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_timer.c</name>
+        </file>
+      </group>
+      <group>
+        <name>port</name>
         <file>
           <name>$PROJ_DIR$\..\Source\FML\GUI\gui_conf.c</name>
         </file>
@@ -2310,84 +2400,6 @@
       </group>
       <group>
         <name>src</name>
-        <group>
-          <name>GUI_Driver</name>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_base.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_batch.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_button.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_controlproperty.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_curve.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_flash.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_general.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_gif.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_graphics.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_historygraph.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_icon.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_image.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_label.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_menu.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_meter.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_music.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_progress.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_QR.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_record.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_rtc.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_sdcard.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_selector.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_slider.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_text.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\Source\FML\GUI\GUI_Driver\src\gui_timer.c</name>
-          </file>
-        </group>
         <file>
           <name>$PROJ_DIR$\..\Source\FML\GUI\gui_cmd_queue.c</name>
         </file>
@@ -2397,15 +2409,24 @@
       </group>
     </group>
     <group>
-      <name>System</name>
+      <name>system</name>
       <file>
         <name>$PROJ_DIR$\..\Source\FML\System\system_info.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Source\FML\System\system_info.h</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Source\FML\System\system_init.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Source\FML\System\system_init.h</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Source\FML\System\system_param.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Source\FML\System\system_param.h</name>
       </file>
     </group>
   </group>

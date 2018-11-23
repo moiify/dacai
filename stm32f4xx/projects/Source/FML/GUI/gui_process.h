@@ -114,7 +114,6 @@ typedef struct
  * @defgroup      gui_process_Exported_Functions 
  * @{  
  */
-void GUI_Update();
 void Gui_CheckCMD_Loop_Process();
 /**
  * @}

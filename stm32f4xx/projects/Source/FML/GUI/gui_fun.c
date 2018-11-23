@@ -13,9 +13,10 @@
 #include "gui_conf.h"
 #include "gui_task.h"
 #include "system_info.h"
+#include "fingerprint_process.h"
 #include "gui_fun.h"
 /**
- * @addtogroup    XXX 
+ * @addtogroup    XXX 	
  * @{  
  */
 
@@ -63,8 +64,8 @@ typedef struct
 {
     uint8_t current_screen_id;
     uint8_t current_equip_id;
-    uint8_t finger_name_buf[10];
-    uint8_t finger_id_buf[10];
+    uint8_t finger_name_buf[FINGER_NAME_MAX];
+    uint8_t finger_id_buf[FINGER_ID_MAX];
     uint16_t record_count;
 }CBvalue_t;
 /**
@@ -184,10 +185,20 @@ static void gui_notify_button(uint16_t screen_id, uint16_t control_id, uint8_t  
     switch (screen_id)
     {
         case FINGERMANAGESCREENID:
-        switch (control_id)
         {
-            //        GUI_TEXT_GetValue(FINGERMANAGESCREENID,FINGER_NAME_VALUCONTROLCID);
-            //        GUI_TEXT_GetValue(FINGERMANAGESCREENID,FINGER_ID_VALUCONTROLCID);
+            switch (control_id)
+            {   
+                case FINGER_MAKE_BUTTON:
+                {   
+                    Finger_Add_Print(s_CBvalue.finger_name_buf,s_CBvalue.finger_id_buf);
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+            break;
         }
         case RECORDSCREENID:
         {
@@ -433,7 +444,7 @@ static void text_screen_update_event()
         GUI_Icon_PlayFrame(TEXTVALUESCREENID,Frame1_VALUCONTROLCID,1);
         GUI_GIF_Stop(TEXTVALUESCREENID,GIF1_VALUCONTROLCID);  
     }
-}     
+}
 /**
  * @}
  */

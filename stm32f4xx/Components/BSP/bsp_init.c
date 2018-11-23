@@ -104,13 +104,15 @@
  */
 void Board_Init()
 {
-    SystemInit();
+    
 }
 
 void BSP_Init(void)
 {   
     CLog_Init(CLogAppender_RTT);
     BSP_USART_Open(BSP_USART1);
+    BSP_USART_Open(BSP_USART2);
+    BSP_EXTI_Open(BSP_EXTI0);
 }
 /**
  * @}

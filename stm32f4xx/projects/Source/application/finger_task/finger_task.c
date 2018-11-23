@@ -16,6 +16,7 @@
 #include "clog.h"
 #include "cshell.h"
 #include "system_info.h"
+#include "fingerprint_process.h"
 #include "finger_task.h"
 /**
  * @addtogroup    XXX 
@@ -105,33 +106,38 @@ uint8_t g_FingerTask_Id = 0;
 void FingerTask_Init(uint8_t taskId)
 {
     g_FingerTask_Id = taskId;
-
+    Finger_SetState(FPState_HandShake_Req);
+    OS_Timer_Start(g_FingerTask_Id, FINGER_TASK_INIT_EVENT, 500);
+   // OS_Timer_Start(g_FingerTask_Id, FINGER_TASK_ADD_EVENT, 100); //≤‚ ‘”√
 }
 
 osal_event_t FingerTask_Process(uint8_t taskid,osal_event_t events)
 {
-    if (events & FINGER_TASK_KEY_PROCESS_EVENT)
-    {       
-        return events ^ FINGER_TASK_KEY_PROCESS_EVENT;
-    }
-    if (events & FINGER_TASK_LOOP_EVENT)
+    if (events & FINGER_TASK_INIT_EVENT)
     {   
-
-        return events ^ FINGER_TASK_LOOP_EVENT;
+        Finger_Init_Process();
+        return events ^ FINGER_TASK_INIT_EVENT;
     }
-    if (events & FINGER_TASK_SHELL_EVENT)
+    if (events & FINGER_TASK_ACK_EVENT)
     {   
-        return events ^ FINGER_TASK_SHELL_EVENT;
+		Finger_ACK_Process();
+        return events ^ FINGER_TASK_ACK_EVENT;
     }
-
-    if (events & FINGER_TASK_OPEN_CMD_EVENT)
+    if (events & FINGER_TASK_ADD_EVENT)
+    {  	
+		Finger_AddPrint_Process();    
+        return events ^ FINGER_TASK_ADD_EVENT;
+    }    
+    if (events & FINGER_TASK_SWIP_EVENT)
     {   
-        return events ^ FINGER_TASK_OPEN_CMD_EVENT;
+        Finger_SwipPrint_Process();
+        return events ^ FINGER_TASK_SWIP_EVENT;
     }
 
-    if (events & FINGER_TASK_CLOSE_CMD_EVENT)
-    {
-        return events ^ FINGER_TASK_CLOSE_CMD_EVENT;
+    if (events & FINGER_TASK_DELETE_EVENT)
+    {   
+        Finger_DeletePrint_Process();
+        return events ^ FINGER_TASK_DELETE_EVENT;
     }
     return 0;
 }

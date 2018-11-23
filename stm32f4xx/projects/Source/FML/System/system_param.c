@@ -108,18 +108,6 @@
  */
 int16_t SystemParam_Init(void)
 {   
-    g_SystemInfo.Equip_Info[0].pre=5031;
-    g_SystemInfo.Equip_Info[0].tem=2092;
-    g_SystemInfo.Equip_Info[0].water=343;
-    g_SystemInfo.Equip_Info[0].run_state=1;
-    g_SystemInfo.Equip_Info[1].pre=4134;
-    g_SystemInfo.Equip_Info[1].tem=2125;
-    g_SystemInfo.Equip_Info[1].water=76; 
-    g_SystemInfo.Equip_Info[1].run_state=0;
-    g_SystemInfo.Equip_Info[2].pre=7587;
-    g_SystemInfo.Equip_Info[2].tem=1878;
-    g_SystemInfo.Equip_Info[2].water=119;
-    g_SystemInfo.Equip_Info[2].run_state=1;    
     return 0;
 }
 
@@ -136,9 +124,7 @@ int16_t SystemParam_Init(void)
 //        BSP_FLASH_ReadBytes(FLASH_PARAM_BACK_START_ADDR,(uint8_t*)&g_SystemInfo,sizeof(g_SystemInfo));
 //        if (CRC16_Modbus((uint8_t*)&g_SystemInfo,sizeof(g_SystemInfo)) == 0)
 //        {
-//            
-//
-//         }
+//        }
 //        else
 //        {
 //            for (i=0;i<8;i++)
@@ -148,13 +134,13 @@ int16_t SystemParam_Init(void)
 //            return -1;
 //        }
 //    }
-//
+//    
 //    INFO("[system]->[param]->read ok\r\n");
 //    return 0;
 //}
-//
+////
 //void SystemParam_Save(void)
-//{
+//{   
 //    g_SystemInfo.crc = CRC16_Modbus((uint8_t*)&g_SystemInfo, sizeof(g_SystemInfo) - sizeof(g_SystemInfo.crc));
 //    BSP_FLASH_EraseSector(FLASH_PARAM_START_ADDR);
 //    BSP_FLASH_WriteBytes(FLASH_PARAM_START_ADDR,(uint8_t*)&g_SystemInfo,sizeof(g_SystemInfo));

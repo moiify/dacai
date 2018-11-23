@@ -105,18 +105,17 @@ uint8_t g_UserTask_Id = 0;
 void UserTask_Init(uint8_t taskId)
 {
     g_UserTask_Id = taskId;
-
 }
 
 osal_event_t UserTask_Process(uint8_t taskid,osal_event_t events)
 {
     if (events & USER_TASK_KEY_PROCESS_EVENT)
     {   
+        
         return events ^ USER_TASK_KEY_PROCESS_EVENT;
     }
     if (events & USER_TASK_LOOP_EVENT)
     {   
-
         return events ^ USER_TASK_LOOP_EVENT;
     }
     if (events & USER_TASK_SHELL_EVENT)

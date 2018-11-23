@@ -156,15 +156,17 @@ void Gui_CMD_Queue_Push()
  */
 
 uint8_t Gui_CMD_Queue_Pop(uint8_t *dst)
-{
+{	
+	uint16_t queue_len;
     if(s_cmd_queue.Count>0)
     {   
         memcpy(dst,s_cmd_queue.Buf[s_cmd_queue.Out].buf,s_cmd_queue.Buf[s_cmd_queue.Out].len);
         memset(s_cmd_queue.Buf[s_cmd_queue.Out].buf,0,s_cmd_queue.Buf[s_cmd_queue.Out].len); //用完后将内存清空，不然下一次短数据受影响
+		queue_len = s_cmd_queue.Buf[s_cmd_queue.Out].len;
         s_cmd_queue.Out++;
         s_cmd_queue.Out %= s_cmd_queue.Size;
         s_cmd_queue.Count--;
-        return 1;
+        return queue_len ;
     }
     else 
     {

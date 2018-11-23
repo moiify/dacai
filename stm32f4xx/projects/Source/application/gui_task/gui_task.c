@@ -107,21 +107,21 @@ uint8_t g_GuiTask_Id = 0;
 void GuiTask_Init(uint8_t taskId)
 {
     g_GuiTask_Id = taskId;
-  //  OS_Timer_Start(g_GuiTask_Id, GUI_TASK_KEY_PROCESS_EVENT,300);
     GUI_CON_SetCallBack();
-    OS_Timer_Start(g_GuiTask_Id, GUI_TASK_LOOP_EVENT,350);
+    OS_Timer_Start(g_GuiTask_Id, GUI_TASK_KEY_PROCESS_EVENT,300);
+    OS_Timer_Start(g_GuiTask_Id, GUI_TASK_LOOP_EVENT,500);
 }
 
 osal_event_t GuiTask_Process(uint8_t taskid,osal_event_t events)
 {
     if (events & GUI_TASK_KEY_PROCESS_EVENT)
     {   
-        GUI_Update();
-//      OS_Timer_Start(g_GuiTask_Id, GUI_TASK_KEY_PROCESS_EVENT,500);
+        GUI_Update();   
+       OS_Timer_Start(g_GuiTask_Id, GUI_TASK_KEY_PROCESS_EVENT,100);
         return events ^ GUI_TASK_KEY_PROCESS_EVENT;
     }
     if (events & GUI_TASK_LOOP_EVENT)
-    {   
+    {  
         Gui_CheckCMD_Loop_Process();
         OS_Timer_Start(g_GuiTask_Id, GUI_TASK_LOOP_EVENT,100);
         return events ^ GUI_TASK_LOOP_EVENT;

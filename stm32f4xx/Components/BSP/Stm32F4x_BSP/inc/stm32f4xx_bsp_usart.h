@@ -29,7 +29,9 @@
  */
 #define BSP_USART1      0
 #define BSP_USART2      1
+#define BSP_USART3      2
 #define BSP_USART1_RXBUF_SIZE 512
+#define BSP_USART2_RXBUF_SIZE 200
 /**
  * @}
  */
@@ -47,6 +49,12 @@
  * @defgroup      stm32f4xx_bsp_usart_Exported_Types 
  * @{  
  */
+typedef struct 
+{
+	uint8_t buf[BSP_USART2_RXBUF_SIZE];
+	uint16_t len;
+}finger_queue_cache_t;
+
 typedef struct
 {
     uint8_t *pData;
@@ -55,6 +63,21 @@ typedef struct
     uint16_t In;
     uint16_t Out;
 }USART_Buf_t;
+
+typedef struct
+{
+	finger_queue_cache_t Buf[5];
+	uint8_t Size;
+	uint8_t Count;
+	uint8_t In;
+	uint8_t Out;
+}Finger_Queue_Cache_t;
+
+typedef struct
+{
+    uint32_t USART1_RX_MemAddr;
+	uint32_t USART2_RX_MemAddr;
+}BSP_DMA_Config_t;
 /**
  * @}
  */
@@ -63,7 +86,7 @@ typedef struct
  * @defgroup      stm32f4xx_bsp_usart_Exported_Variables 
  * @{  
  */
-
+extern Finger_Queue_Cache_t Finger_Queue_Cache; //≤‚ ‘”√ –Ë÷ÿ–¥
 /**
  * @}
  */

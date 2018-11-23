@@ -43,6 +43,7 @@
 #define CLOG_APPENDER_FLASH_ENABLE       0
 #define CLOG_APPENDER_RTT_ENABLE         1
      
+//#define CLOG_DEFAULT_APPENDER   CLOG_APPENDER_RTT
 #define CLOG_DEFAULT_APPENDER   CLOG_APPENDER_RTT
 
 /************************************************

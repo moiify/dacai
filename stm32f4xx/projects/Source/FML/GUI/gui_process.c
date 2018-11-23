@@ -108,7 +108,8 @@ void Gui_CheckCMD_Loop_Process()
 {   
     uint16_t size=0;  
     Gui_CMD_Queue_Push();
-    if(Gui_CMD_Queue_Pop(cmd_buffer))                                              					 //接收到指令
+	size = Gui_CMD_Queue_Pop(cmd_buffer);
+    if(size>0)                                              					 //接收到指令
     {                                                                           
         gui_Message_Process((GUI_Dacai_Proto_t *)cmd_buffer, size);              //指令处理
     }                                                                           
@@ -130,18 +131,18 @@ static void gui_Message_Process( GUI_Dacai_Proto_t* msg, uint16_t size )
     uint32_t value = BIG2LITTLESWAP32(msg->param);                                     //数值
     
     
-    switch(cmd_type)                                                                
-    {  
-        case NOTIFY_TOUCH_PRESS:                                                        //触摸屏按下
-        case NOTIFY_TOUCH_RELEASE:                                                      //触摸屏松开
-        {
-            if(GUI_TOUCH_CallBack!=NULL)
-            {
-                GUI_TOUCH_CallBack(cmd_buffer[1],BIG2LITTLESWAP16(cmd_buffer[2]),BIG2LITTLESWAP16(cmd_buffer[4])); 
-            }
-            break;
-        }
-        case NOTIFY_WRITE_FLASH_OK:                                                     //写FLASH成功
+	switch (cmd_type)
+	{
+		case NOTIFY_TOUCH_PRESS:                                                        //触摸屏按下
+		case NOTIFY_TOUCH_RELEASE:                                                      //触摸屏松开
+			{
+				if (GUI_TOUCH_CallBack != NULL)
+				{
+					GUI_TOUCH_CallBack(cmd_buffer[1], BIG2LITTLESWAP16(cmd_buffer[2]), BIG2LITTLESWAP16(cmd_buffer[4]));
+				}
+				break;
+			}
+		case NOTIFY_WRITE_FLASH_OK:                                                     //写FLASH成功
         {
             if(GUI_FLASHW_CallBack!=NULL)
             {
